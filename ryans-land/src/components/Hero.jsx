@@ -30,10 +30,34 @@ export default function Hero({ onShopClick, onCartOpen }) {
         </div>
 
         <div className="reveal">
-          <div className="rounded-2xl border bg-white/70 backdrop-blur p-6 shadow-glow">
-            {/* use a local seed image so preview appears reliably */}
-            <img alt="Store preview" src="/images/seed1.jpg" className="rounded-xl w-full" />
-            <div className="mt-4 text-sm text-slate-500">This is a demo UI. No real checkout — just portfolio swagger.</div>
+          <div className="rounded-2xl border bg-white/70 backdrop-blur p-6 shadow-glow grid md:grid-cols-2 gap-4 items-center">
+            {/* store image */}
+            <div>
+              <img alt="Store preview" src="/images/seed1.jpg" className="rounded-xl w-full h-44 object-cover" />
+            </div>
+            {/* store info */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="font-bold text-lg">Ryan’s Land - Demo Store</div>
+                  <div className="text-sm text-slate-600">Convenience • Snacks • Home goods</div>
+                </div>
+                <div className="text-right">
+                  <div className="font-semibold text-brand-600">4.5 ★</div>
+                  <div className="text-xs text-slate-500">(1.2k reviews)</div>
+                </div>
+              </div>
+              <div className="flex gap-4 text-sm">
+                <div className="text-slate-600">Open · 8am–10pm</div>
+                <div className="text-slate-600">•</div>
+                <div className="text-slate-600">123 Demo Ave, Suite 100</div>
+              </div>
+              <div className="flex gap-3 mt-2">
+                <a href="#categories" className="px-4 py-2 rounded-lg bg-brand-600 text-white text-sm">Shop this store</a>
+                <button onClick={onCartOpen} className="px-4 py-2 rounded-lg border border-slate-200 text-sm">View cart</button>
+              </div>
+              <div className="text-xs text-slate-500 mt-1">This is a mock preview of a real storefront — no real orders processed.</div>
+            </div>
           </div>
         </div>
       </div>

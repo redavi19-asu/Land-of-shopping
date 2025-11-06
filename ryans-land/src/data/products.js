@@ -61,28 +61,28 @@ export const products = [
   { id: "p40", title: "Mini Flashlight", price: 1.0, category: "dollar-deals", img: "images/p40.jpg" },
 
   // electronics
-  { id: "e1", title: "USB-C Phone Charger", price: 9.99, category: "electronics", img: "https://picsum.photos/seed/e1/500/500", rating: 4.1 },
-  { id: "e2", title: "Wireless Earbuds", price: 24.99, category: "electronics", img: "https://picsum.photos/seed/e2/500/500", rating: 4.0, badge: "hot" },
-  { id: "e3", title: "Portable Power Bank 10k", price: 19.99, category: "electronics", img: "https://picsum.photos/seed/e3/500/500", rating: 4.2 },
-  { id: "e4", title: "Bluetooth Speaker Mini", price: 29.99, category: "electronics", img: "https://picsum.photos/seed/e4/500/500", rating: 4.3 },
+  { id: "e1", title: "USB-C Phone Charger", price: 9.99, category: "electronics", img: "images/e1.jpg", rating: 4.1 },
+  { id: "e2", title: "Wireless Earbuds", price: 24.99, category: "electronics", img: "images/e2.jpg", rating: 4.0, badge: "hot" },
+  { id: "e3", title: "Portable Power Bank 10k", price: 19.99, category: "electronics", img: "images/e3.jpg", rating: 4.2 },
+  { id: "e4", title: "Bluetooth Speaker Mini", price: 29.99, category: "electronics", img: "images/e4.jpg", rating: 4.3 },
 
   // toys
-  { id: "t1", title: "Building Blocks Set", price: 14.99, category: "toys", img: "https://picsum.photos/seed/t1/500/500", rating: 4.5 },
-  { id: "t2", title: "Puzzle 500pc", price: 9.99, category: "toys", img: "https://picsum.photos/seed/t2/500/500", rating: 4.2 },
-  { id: "t3", title: "Plush Bunny", price: 6.99, category: "toys", img: "https://picsum.photos/seed/t3/500/500", rating: 4.6, badge: "popular" },
+  { id: "t1", title: "Building Blocks Set", price: 14.99, category: "toys", img: "images/t1.jpg", rating: 4.5 },
+  { id: "t2", title: "Puzzle 500pc", price: 9.99, category: "toys", img: "images/t2.jpg", rating: 4.2 },
+  { id: "t3", title: "Plush Bunny", price: 6.99, category: "toys", img: "images/t3.jpg", rating: 4.6, badge: "popular" },
 
   // kitchen
-  { id: "k1", title: "Nonstick Frying Pan 10in", price: 24.99, category: "kitchen", img: "https://picsum.photos/seed/k1/500/500", rating: 4.4 },
-  { id: "k2", title: "Chef Knife 8in", price: 19.99, category: "kitchen", img: "https://picsum.photos/seed/k2/500/500", rating: 4.5 },
-  { id: "k3", title: "Silicone Spatula Set", price: 7.99, category: "kitchen", img: "https://picsum.photos/seed/k3/500/500", rating: 4.1 },
+  { id: "k1", title: "Nonstick Frying Pan 10in", price: 24.99, category: "kitchen", img: "images/k1.jpg", rating: 4.4 },
+  { id: "k2", title: "Chef Knife 8in", price: 19.99, category: "kitchen", img: "images/k2.jpg", rating: 4.5 },
+  { id: "k3", title: "Silicone Spatula Set", price: 7.99, category: "kitchen", img: "images/k3.jpg", rating: 4.1 },
 
   // outdoors
-  { id: "o1", title: "Camping Lantern", price: 18.99, category: "outdoors", img: "https://picsum.photos/seed/o1/500/500", rating: 4.0 },
-  { id: "o2", title: "Insulated Water Bottle", price: 14.99, category: "outdoors", img: "https://picsum.photos/seed/o2/500/500", rating: 4.3 },
+  { id: "o1", title: "Camping Lantern", price: 18.99, category: "outdoors", img: "images/o1.jpg", rating: 4.0 },
+  { id: "o2", title: "Insulated Water Bottle", price: 14.99, category: "outdoors", img: "images/o2.jpg", rating: 4.3 },
 
   // pets
-  { id: "pet1", title: "Dog Chew Toy", price: 6.99, category: "pets", img: "https://picsum.photos/seed/pet1/500/500", rating: 4.6 },
-  { id: "pet2", title: "Cat Treats 8oz", price: 3.99, category: "pets", img: "https://picsum.photos/seed/pet2/500/500", rating: 4.2 }
+  { id: "pet1", title: "Dog Chew Toy", price: 6.99, category: "pets", img: "images/pet1.jpg", rating: 4.6 },
+  { id: "pet2", title: "Cat Treats 8oz", price: 3.99, category: "pets", img: "images/pet2.jpg", rating: 4.2 }
 ];
 
 // Make more items featured so the featured scroller is long
