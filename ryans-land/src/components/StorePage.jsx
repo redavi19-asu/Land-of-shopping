@@ -6,7 +6,7 @@ export default function StorePage({ products = [] }) {
       <div className="reveal grid md:grid-cols-3 gap-6 items-start">
         <div className="md:col-span-1">
           <div className="rounded-2xl overflow-hidden border p-4 bg-white">
-            <img src="/images/store.jpg" alt="Storefront" className="w-full h-44 object-cover rounded-md" />
+            <img src="/images/store.png" alt="Storefront" className="w-full h-44 object-cover rounded-md" />
             <h3 className="mt-4 text-xl font-bold">Ryan’s Land — Demo Store</h3>
             <div className="text-sm text-slate-600 mt-2">Convenience, snacks, home goods. Open 8am–10pm.</div>
             <div className="mt-4 text-sm text-slate-700">

@@ -33,7 +33,7 @@ export default function Hero({ onShopClick, onCartOpen }) {
           <div className="rounded-2xl border bg-white/70 backdrop-blur p-6 shadow-glow grid md:grid-cols-2 gap-4 items-center">
             {/* store image */}
             <div>
-              <img alt="Store preview" src="/images/store.jpg" className="rounded-xl w-full h-44 object-cover" />
+              <img alt="Store preview" src="/images/store.png" className="rounded-xl w-full h-44 object-cover" />
             </div>
             {/* store info */}
             <div className="space-y-2">
