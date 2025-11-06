@@ -181,7 +181,7 @@ export default function App() {
           <button
             aria-label="scroll featured left"
             onClick={() => scrollByOffset(featuredRef.current, -1)}
-            className={`absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 rounded-full p-2 shadow-md hover:bg-white hidden md:flex items-center justify-center ${featuredAtStart ? 'opacity-30 pointer-events-none' : ''}`}
+            className={`absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 rounded-full p-2 shadow-md hover:bg-white hidden sm:flex items-center justify-center ${featuredAtStart ? 'opacity-30 pointer-events-none' : ''}`}
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-5 h-5 text-slate-700" fill="none" stroke="currentColor">
               <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -189,7 +189,7 @@ export default function App() {
           </button>
           <div
             ref={featuredRef}
-            className="overflow-x-auto"
+            className="overflow-x-auto snap-x snap-mandatory"
             tabIndex={0}
             onKeyDown={(e) => {
               if (e.key === 'ArrowLeft') scrollByOffset(featuredRef.current, -1);
@@ -198,7 +198,7 @@ export default function App() {
           >
             <div className="flex gap-6 px-2">
               {featured.map(p => (
-                <div key={p.id} className="reveal flex-shrink-0 min-w-[220px]">
+                <div key={p.id} className="reveal flex-shrink-0 min-w-[220px] snap-start">
                   <ProductCard item={p} onAdd={addToCart} />
                 </div>
               ))}
@@ -241,10 +241,10 @@ export default function App() {
             <div className="mt-6 relative">
               {/* left gradient mask for category scroller */}
               <div className={`pointer-events-none absolute left-0 top-0 h-full w-12 transition-opacity hidden md:block ${categoryScroll[c.id]?.atStart ? 'opacity-0' : 'opacity-100'}`} style={{ background: 'linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,0))' }} />
-              <button
+        <button
                   aria-label={`scroll ${c.id} left`}
                   onClick={() => scrollByOffset(categoryRefs.current[c.id], -1)}
-                  className={`absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 rounded-full p-2 shadow-md hover:bg-white hidden md:flex items-center justify-center ${categoryScroll[c.id]?.atStart ? 'opacity-30 pointer-events-none' : ''}`}
+          className={`absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 rounded-full p-2 shadow-md hover:bg-white hidden sm:flex items-center justify-center ${categoryScroll[c.id]?.atStart ? 'opacity-30 pointer-events-none' : ''}`}
                 >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-5 h-5 text-slate-700" fill="none" stroke="currentColor">
                   <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -252,7 +252,7 @@ export default function App() {
               </button>
               <div
                 ref={(el) => (categoryRefs.current[c.id] = el)}
-                className="overflow-x-auto"
+                className="overflow-x-auto snap-x snap-mandatory"
                 tabIndex={0}
                 onKeyDown={(e) => {
                   const el = categoryRefs.current[c.id];
@@ -263,7 +263,7 @@ export default function App() {
               >
                 <div className="flex gap-6 px-2">
                     {(allByCategory[c.id] || []).map(p => (
-                      <div key={p.id} className="reveal flex-shrink-0 min-w-[220px]">
+                      <div key={p.id} className="reveal flex-shrink-0 min-w-[220px] snap-start">
                         <ProductCard item={p} onAdd={addToCart} />
                       </div>
                     ))}

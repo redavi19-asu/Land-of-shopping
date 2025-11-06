@@ -4,7 +4,7 @@ export default function ProductCard({ item, onAdd }) {
       {item.badge && (
         <div className="absolute top-3 left-3 bg-yellow-300 text-xs font-bold px-2 py-1 rounded">{item.badge}</div>
       )}
-      <img src={item.img} alt={item.title} loading="lazy" decoding="async" className="w-full h-56 object-cover" />
+  <img src={item.img} alt={item.title} loading="lazy" decoding="async" className="w-full h-56 object-cover transition-transform duration-200 ease-out hover:scale-105" />
       <div className="p-4">
         <div className="font-semibold">{item.title}</div>
         <div className="mt-1 text-brand-700 font-bold">${item.price.toFixed(2)}</div>

@@ -24,4 +24,21 @@ git add docs && git commit -m "chore: deploy updated images" && git push origin 
 ```
 
 Enjoy the demo storefront — open `https://<your-username>.github.io/Land-of-shopping/` after pushing to see the deployed site.
+
+Polish / Template notes
+-----------------------
+This repository is a template/demo. If you'd like to swap in your own photos later, follow these steps:
+
+1. Place your images in `ryans-land/public/images/` using the same filenames used in `ryans-land/src/data/products.js` (for example `p1.jpg`, `e1.jpg`, `store.jpg`).
+2. Run a build and deploy:
+
+```bash
+npm --prefix ryans-land run build
+rm -rf docs && mkdir -p docs && cp -r ryans-land/dist/* docs/
+git add docs && git commit -m "chore: deploy updated images" && git push origin main
+```
+
+3. Verify visually by visiting the Pages URL or running `node ryans-land/scripts/capture_viewports.cjs`.
+
+If you'd like, I can also accept a ZIP of images and insert them into the project so the visual is ready to go.
 # Land-of-shopping
