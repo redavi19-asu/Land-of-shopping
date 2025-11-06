@@ -20,6 +20,23 @@ const puppeteer = require('puppeteer');
       logs.push(text);
       console.log(text);
     });
+    // capture failed requests (404s, network errors)
+    page.on('requestfailed', req => {
+      const failure = req.failure && req.failure();
+      const reason = failure && failure.errorText ? failure.errorText : (failure && failure.errorCode) || 'failed';
+      const text = `REQUESTFAILED: ${req.url()} -> ${reason}`;
+      logs.push(text);
+      console.error(text);
+    });
+    // capture responses with non-OK status so we can see 404 URLs
+    page.on('response', resp => {
+      const status = resp.status();
+      if (status >= 400) {
+        const text = `RESPONSE ${status}: ${resp.url()}`;
+        logs.push(text);
+        console.error(text);
+      }
+    });
     page.on('pageerror', err => {
       const text = `PAGEERROR: ${err.toString()}`;
       logs.push(text);
