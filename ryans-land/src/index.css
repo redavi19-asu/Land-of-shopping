@@ -15,7 +15,30 @@
 .scrolly-pin { position: sticky; top: 0; }
 
 body { @apply bg-gradient-to-b from-white to-slate-50; }
+/* color variables and themeable backgrounds */
+:root {
+  --bg-start: #ffffff;
+  --bg-end: #f8fafc;
+  --text: #0f172a;
+  --muted: #64748b;
+  --card-bg: #ffffff;
+  --brand: #06b6d4;
+}
 
+body { background: linear-gradient(180deg, var(--bg-start), var(--bg-end)); color: var(--text); }
+
+/* dark theme variables */
+.dark-theme {
+  --bg-start: #071126;
+  --bg-end: #071126;
+  --text: #e6eef8;
+  --muted: #94a3b8;
+  --card-bg: rgba(10,16,24,0.6);
+  --brand: #7dd3fc;
+}
+
+/* smooth transitions when toggling theme */
+html { transition: background .25s ease, color .25s ease; }
 /* Promo marquee */
 .promo-marquee { background: linear-gradient(90deg, rgba(255,246,229,0.9), rgba(255,250,240,0.7)); overflow: hidden; }
 .promo-marquee__track { display: inline-block; white-space: nowrap; will-change: transform; animation: marquee 18s linear infinite; }
@@ -48,15 +71,15 @@ body { @apply bg-gradient-to-b from-white to-slate-50; }
 }
 
 /* Header & footer basic layout */
-.site-header { position: sticky; top: 0; z-index: 60; background: rgba(255,255,255,0.9); backdrop-filter: blur(4px); border-bottom: 1px solid rgba(2,6,23,0.04); }
-.site-header .logo { color: #0f172a; }
+.site-header { position: sticky; top: 0; z-index: 60; background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4)); backdrop-filter: blur(6px); border-bottom: 1px solid rgba(2,6,23,0.04); }
+.site-header .logo { color: var(--text); }
 .search-input { min-width: 220px; }
 
-.site-footer { background: linear-gradient(180deg,#fff,#f7fafc); }
+.site-footer { background: linear-gradient(180deg,var(--bg-start),var(--bg-end)); }
 
 /* Silver decorative lines */
 .silver-lines { position: fixed; inset: 0; pointer-events: none; z-index: 10; }
-.silver-line { position: absolute; width: 120px; height: 200vh; opacity: .12; filter: drop-shadow(0 6px 18px rgba(2,6,23,0.06)); }
+.silver-line { position: absolute; width: 120px; height: 200vh; opacity: .12; filter: drop-shadow(0 6px 18px rgba(2,6,23,0.06)); stroke: var(--muted); }
 .silver-line.left { left: 8px; top: -30vh; transform-origin: center top; animation: silverLoop 20s linear infinite; }
 .silver-line.right { right: 8px; top: -20vh; transform-origin: center top; animation: silverLoop 24s linear infinite reverse; }
 
