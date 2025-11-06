@@ -35,3 +35,15 @@ body { @apply bg-gradient-to-b from-white to-slate-50; }
 .sparkle { position: absolute; inset: auto; width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #fff, #ffd700 40%, transparent 60%); filter: drop-shadow(0 2px 6px rgba(0,0,0,0.12)); animation: sparkle 1.8s linear infinite; }
 @keyframes sparkle { 0% { transform: translateY(0) scale(.6); opacity: .9 } 50% { transform: translateY(-8px) scale(1.1); opacity: .6 } 100% { transform: translateY(0) scale(.6); opacity: .9 } }
 
+/* Left scrolly navigation */
+.left-scrolly__item { display:flex; align-items:center; gap:.6rem; background: rgba(255,255,255,0.8); padding: .35rem .6rem; border-radius: 9999px; box-shadow: 0 6px 18px rgba(2,6,23,0.06); color: #334155; transform: translateX(-8px); transition: transform .32s cubic-bezier(.2,.9,.2,1), box-shadow .2s, background .2s; }
+.left-scrolly__item .dot { width:10px; height:10px; border-radius:50%; background: #CBD5E1; display:inline-block; flex-shrink:0; }
+.left-scrolly__item .label { font-weight:600; font-size:0.85rem; }
+.left-scrolly__item.active { transform: translateX(0); background: linear-gradient(90deg,#fff,#f8fafc); box-shadow: 0 10px 30px rgba(2,6,23,0.12); }
+.left-scrolly__item.active .dot { background: #06b6d4; box-shadow:0 4px 10px rgba(6,182,212,0.2); }
+.left-scrolly { pointer-events:auto }
+
+@media (prefers-reduced-motion: reduce) {
+  .promo-marquee__track, .sale-banner.fly, .left-scrolly__item { animation: none !important; transition: none !important; }
+}
+

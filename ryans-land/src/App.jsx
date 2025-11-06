@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Hero from "./components/Hero.jsx";
+import LeftScrolly from "./components/LeftScrolly.jsx";
 import CategoryCard from "./components/CategoryCard.jsx";
 import ProductCard from "./components/ProductCard.jsx";
 import ScrollySection from "./components/ScrollySection.jsx";
@@ -152,6 +153,7 @@ export default function App() {
 
   return (
     <>
+      <LeftScrolly />
       <Hero onShopClick={scrollToCategories} onCartOpen={()=>setOpenCart(true)} />
 
       <section id="categories" ref={categoriesRef} className="max-w-7xl mx-auto px-6 py-16">
