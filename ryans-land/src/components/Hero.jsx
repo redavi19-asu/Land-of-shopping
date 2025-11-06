@@ -1,0 +1,41 @@
+export default function Hero({ onShopClick, onCartOpen }) {
+  return (
+    <header className="relative overflow-hidden">
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(1200px_500px_at_50%_-20%,rgba(25,159,255,.18),transparent)]" />
+      <nav className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+        <a href="#" className="font-black text-xl tracking-tight">
+          <span className="text-brand-600">Ryan’s</span> Land
+        </a>
+        <div className="flex gap-4">
+          <a href="#categories" className="text-sm hover:text-brand-600">Categories</a>
+          <a href="#featured" className="text-sm hover:text-brand-600">Featured</a>
+          <a href="#story" className="text-sm hover:text-brand-600">How it’s built</a>
+          <button onClick={onCartOpen} className="rounded-lg bg-brand-600 text-white px-3 py-2 text-sm shadow-glow hover:bg-brand-700">Cart</button>
+        </div>
+      </nav>
+
+      <div className="max-w-7xl mx-auto px-6 pt-10 pb-20 grid md:grid-cols-2 gap-10 items-center">
+        <div className="reveal">
+          <h1 className="text-4xl md:text-6xl font-black leading-tight">
+            A clean, modern storefront for <span className="text-brand-600">budget-smart</span> shopping.
+          </h1>
+          <p className="mt-4 text-slate-600 max-w-prose">
+            Built with React + Tailwind. Smooth scroll-driven reveals, category browsing,
+            featured products, and a mock cart — perfect for showcasing your e-commerce chops.
+          </p>
+          <div className="mt-6 flex gap-3">
+            <a href="#featured" className="px-5 py-3 rounded-lg bg-brand-600 text-white hover:bg-brand-700 shadow-glow">Shop Featured</a>
+            <button onClick={onShopClick} className="px-5 py-3 rounded-lg border border-slate-300 hover:border-brand-600 hover:text-brand-700">Browse All</button>
+          </div>
+        </div>
+
+        <div className="reveal">
+          <div className="rounded-2xl border bg-white/70 backdrop-blur p-6 shadow-glow">
+            <img alt="Store preview" src="https://placehold.co/900x600?text=Store+Preview" className="rounded-xl w-full" />
+            <div className="mt-4 text-sm text-slate-500">This is a demo UI. No real checkout — just portfolio swagger.</div>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}

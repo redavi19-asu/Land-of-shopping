@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px) scale(.98);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.scrolly-pin { position: sticky; top: 0; }
+
+body { @apply bg-gradient-to-b from-white to-slate-50; }
