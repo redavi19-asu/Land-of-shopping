@@ -29,7 +29,7 @@ export default function LeftScrolly() {
         aria-controls="site-left-scrolly"
         aria-expanded={mobileOpen}
         onClick={() => setMobileOpen(v => !v)}
-        className="md:hidden fixed left-4 top-1/4 z-40 bg-white/80 p-2 rounded-full shadow-md"
+        className="md:hidden fixed left-4 top-1/4 z-40 bg-white/60 p-2 rounded-full shadow-sm"
       >
         <span className="sr-only">Toggle navigation</span>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-slate-700">
