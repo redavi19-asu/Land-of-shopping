@@ -18,6 +18,22 @@ if (!fs.existsSync(productsFile)) {
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
 const content = fs.readFileSync(productsFile, 'utf8');
+
+// parse categories (id -> name) to improve search queries
+const categoriesMatch = content.match(/export const categories = \[([\s\S]*?)\];/);
+let categoryMap = {};
+if (categoriesMatch) {
+  const catBlock = categoriesMatch[1];
+  const cre = /\{([\s\S]*?)\}/g;
+  let cmatch;
+  while ((cmatch = cre.exec(catBlock)) !== null) {
+    const obj = cmatch[1];
+    const idM = obj.match(/id:\s*"([^"]+)"/);
+    const nameM = obj.match(/name:\s*"([^"]+)"/);
+    if (idM && nameM) categoryMap[idM[1]] = nameM[1];
+  }
+}
+
 const re = /\{([\s\S]*?)\}/g;
 const productsArrayMatch = content.match(/export const products = \[([\s\S]*?)\];/);
 const productsBlock = productsArrayMatch ? productsArrayMatch[1] : null;
@@ -32,12 +48,16 @@ while ((match = re.exec(productsBlock)) !== null) {
   const obj = match[1];
   const idMatch = obj.match(/id:\s*"([^"]+)"/);
   const titleMatch = obj.match(/title:\s*"([^"]+)"/);
-  if (idMatch && titleMatch) items.push({ id: idMatch[1], title: titleMatch[1] });
+  const catMatch = obj.match(/category:\s*"([^"]+)"/);
+  if (idMatch && titleMatch) items.push({ id: idMatch[1], title: titleMatch[1], category: catMatch ? catMatch[1] : null });
 }
 
 const byId = Object.fromEntries(items.map(i => [i.id, i]));
 
-const ids = process.argv.slice(2);
+// parse args: ids (positional) and flags like --replace
+const rawArgs = process.argv.slice(2);
+const replaceFlag = rawArgs.includes('--replace');
+const ids = rawArgs.filter(a => a !== '--replace');
 const targetIds = ids.length ? ids : items.map(i => i.id);
 
 const fetch = global.fetch || require('node-fetch');
@@ -68,55 +88,73 @@ async function searchAndDownload(id) {
   }
   const outPath = path.join(outDir, `${id}.jpg`);
   const metaPath = path.join(outDir, `${id}.json`);
-  if (fs.existsSync(outPath)) {
+  if (fs.existsSync(outPath) && !replaceFlag) {
     console.log('Skip existing', id + '.jpg');
     return;
   }
 
-  const q = encodeURIComponent(info.title);
-  const url = `https://api.unsplash.com/search/photos?query=${q}&per_page=1`;
-  console.log('Searching Unsplash for', info.title);
-  try {
-    const res = await fetch(url, { headers: { Authorization: `Client-ID ${process.env.UNSPLASH_ACCESS_KEY}` } });
-    if (!res.ok) {
-      console.warn('Unsplash search failed', res.status);
-      return;
-    }
-    const json = await res.json();
-    if (!json.results || json.results.length === 0) {
-      console.warn('No results for', info.title);
-      return;
-    }
-    const first = json.results[0];
-    const downloadUrl = first.urls && (first.urls.regular || first.urls.small || first.urls.raw);
-    if (!downloadUrl) {
-      console.warn('No downloadable URL for', id);
-      return;
-    }
-    console.log('Downloading image for', id, 'from', downloadUrl);
-    await download(downloadUrl, outPath);
-    const stats = fs.statSync(outPath);
-    if (stats.size < 2000) {
-      console.warn('Downloaded file is suspiciously small, deleting:', outPath);
-      fs.unlinkSync(outPath);
-      return;
-    }
-    const meta = {
-      id,
-      title: info.title,
-      unsplash: {
-        id: first.id,
-        user: first.user && first.user.name,
-        profile: first.user && first.user.links && first.user.links.html,
-        link: first.links && first.links.html
+  // build a set of queries to improve the chance of a relevant image
+  const queries = [];
+  const catName = info.category ? categoryMap[info.category] || info.category : '';
+  if (catName) queries.push(`${info.title} ${catName}`);
+  queries.push(info.title);
+  queries.push(`${info.title} product`);
+
+  let succeeded = false;
+  for (const qRaw of queries) {
+    const q = encodeURIComponent(qRaw);
+    const url = `https://api.unsplash.com/search/photos?query=${q}&per_page=1`;
+    console.log('Searching Unsplash for', qRaw);
+    try {
+      const res = await fetch(url, { headers: { Authorization: `Client-ID ${process.env.UNSPLASH_ACCESS_KEY}` } });
+      if (!res.ok) {
+        console.warn('Unsplash search failed', res.status, 'for query', qRaw);
+        if (res.status === 401) {
+          console.error('Authentication failed: check UNSPLASH_ACCESS_KEY');
+          return;
+        }
+        continue;
       }
-    };
-    fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2));
-    console.log('Saved', outPath, 'and metadata', metaPath);
-  } catch (err) {
-    console.error('Error for', id, err.message);
-    if (fs.existsSync(outPath)) fs.unlinkSync(outPath);
+      const json = await res.json();
+      if (!json.results || json.results.length === 0) {
+        console.warn('No results for', qRaw);
+        continue;
+      }
+      const first = json.results[0];
+      const downloadUrl = first.urls && (first.urls.full || first.urls.regular || first.urls.small || first.urls.raw);
+      if (!downloadUrl) {
+        console.warn('No downloadable URL for', id, 'on query', qRaw);
+        continue;
+      }
+      console.log('Downloading image for', id, 'from', downloadUrl);
+      await download(downloadUrl, outPath);
+      const stats = fs.statSync(outPath);
+      if (stats.size < 2000) {
+        console.warn('Downloaded file is suspiciously small, deleting:', outPath);
+        fs.unlinkSync(outPath);
+        continue;
+      }
+      const meta = {
+        id,
+        title: info.title,
+        query: qRaw,
+        unsplash: {
+          id: first.id,
+          user: first.user && first.user.name,
+          profile: first.user && first.user.links && first.user.links.html,
+          link: first.links && first.links.html
+        }
+      };
+      fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2));
+      console.log('Saved', outPath, 'and metadata', metaPath);
+      succeeded = true;
+      break;
+    } catch (err) {
+      console.error('Error for', id, err.message);
+      if (fs.existsSync(outPath)) fs.unlinkSync(outPath);
+    }
   }
+  if (!succeeded) console.warn('Failed to find image for', id);
 }
 
 (async () => {
