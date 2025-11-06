@@ -47,3 +47,33 @@ body { @apply bg-gradient-to-b from-white to-slate-50; }
   .promo-marquee__track, .sale-banner.fly, .left-scrolly__item { animation: none !important; transition: none !important; }
 }
 
+/* Header & footer basic layout */
+.site-header { position: sticky; top: 0; z-index: 60; background: rgba(255,255,255,0.9); backdrop-filter: blur(4px); border-bottom: 1px solid rgba(2,6,23,0.04); }
+.site-header .logo { color: #0f172a; }
+.search-input { min-width: 220px; }
+
+.site-footer { background: linear-gradient(180deg,#fff,#f7fafc); }
+
+/* Silver decorative lines */
+.silver-lines { position: fixed; inset: 0; pointer-events: none; z-index: 10; }
+.silver-line { position: absolute; width: 120px; height: 200vh; opacity: .12; filter: drop-shadow(0 6px 18px rgba(2,6,23,0.06)); }
+.silver-line.left { left: 8px; top: -30vh; transform-origin: center top; animation: silverLoop 20s linear infinite; }
+.silver-line.right { right: 8px; top: -20vh; transform-origin: center top; animation: silverLoop 24s linear infinite reverse; }
+
+@keyframes silverLoop {
+  0% { transform: translateY(0) rotate(0deg); opacity:.12 }
+  25% { transform: translateY(-15%) rotate(2deg); opacity:.14 }
+  50% { transform: translateY(-30%) rotate(0deg); opacity:.11 }
+  75% { transform: translateY(-15%) rotate(-2deg); opacity:.13 }
+  100% { transform: translateY(0) rotate(0deg); opacity:.12 }
+}
+
+@media (max-width: 460px) {
+  .silver-line { display:none; }
+  .search-input { display:none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .silver-line { animation: none !important; }
+}
+
