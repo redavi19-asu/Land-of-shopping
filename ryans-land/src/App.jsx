@@ -230,7 +230,7 @@ export default function App() {
 
       <section className="max-w-7xl mx-auto px-6 py-10 space-y-16">
         {/* Store preview / mock store page */}
-        <StorePage products={products} />
+  <StorePage products={products} onAdd={addToCart} />
         {categories.map((c)=>(
           <div key={c.id} id={`cat-${c.id}`}>
             <div className="reveal">
