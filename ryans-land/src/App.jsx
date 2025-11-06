@@ -27,6 +27,7 @@ export default function App() {
   const [featuredAtStart, setFeaturedAtStart] = useState(true);
   const [featuredAtEnd, setFeaturedAtEnd] = useState(false);
   const [categoryScroll, setCategoryScroll] = useState({});
+  const [extraItems, setExtraItems] = useState({});
 
   function scrollByOffset(el, dir = 1) {
     if (!el) return;
@@ -98,6 +99,15 @@ export default function App() {
   const categoriesRef = useRef(null);
   const scrollToCategories = () => categoriesRef.current?.scrollIntoView({ behavior: "smooth" });
 
+  function loadMoreForCategory(catId, count = 8) {
+    setExtraItems(prev => ({ ...prev, [catId]: (prev[catId] || 0) + count }));
+  }
+
+  function loadMoreFeatured(count = 8) {
+    // track under special key 'featured'
+    setExtraItems(prev => ({ ...prev, featured: (prev.featured || 0) + count }));
+  }
+
   return (
     <>
       <Hero onShopClick={scrollToCategories} onCartOpen={()=>setOpenCart(true)} />
@@ -122,6 +132,10 @@ export default function App() {
         </div>
         {/* Horizontal scrollable featured row with chevrons */}
         <div className="mt-8 relative">
+          {/* left gradient mask for featured */}
+          <div className={`pointer-events-none absolute left-0 top-0 h-full w-12 transition-opacity hidden md:block ${featuredAtStart ? 'opacity-0' : 'opacity-100'}`} style={{ background: 'linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,0))' }} />
+          {/* right gradient mask for featured */}
+          <div className={`pointer-events-none absolute right-0 top-0 h-full w-12 transition-opacity hidden md:block ${featuredAtEnd ? 'opacity-0' : 'opacity-100'}`} style={{ background: 'linear-gradient(270deg, rgba(255,255,255,1), rgba(255,255,255,0))' }} />
           <button
             aria-label="scroll featured left"
             onClick={() => scrollByOffset(featuredRef.current, -1)}
@@ -131,14 +145,34 @@ export default function App() {
               <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <div ref={featuredRef} className="overflow-x-auto">
+          <div
+            ref={featuredRef}
+            className="overflow-x-auto"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'ArrowLeft') scrollByOffset(featuredRef.current, -1);
+              if (e.key === 'ArrowRight') scrollByOffset(featuredRef.current, 1);
+            }}
+          >
             <div className="flex gap-6 px-2">
               {featured.map(p => (
                 <div key={p.id} className="reveal flex-shrink-0 min-w-[220px]">
                   <ProductCard item={p} onAdd={addToCart} />
                 </div>
               ))}
+              {Array.from({ length: extraItems.featured || 0 }).map((_, i) => {
+                const p = featured[i % featured.length];
+                const copy = { ...p, id: `${p.id}-f-${i}` };
+                return (
+                  <div key={copy.id} className="reveal flex-shrink-0 min-w-[220px]">
+                    <ProductCard item={copy} onAdd={addToCart} />
+                  </div>
+                );
+              })}
             </div>
+          </div>
+          <div className="mt-3 flex gap-2 justify-end">
+            <button onClick={() => loadMoreFeatured(8)} className="px-3 py-2 rounded bg-slate-100 text-slate-800 text-sm">Load more featured</button>
           </div>
           <button
             aria-label="scroll featured right"
@@ -161,11 +195,13 @@ export default function App() {
             </div>
             {/* Horizontal scrollable product list for this category with chevrons */}
             <div className="mt-6 relative">
+              {/* left gradient mask for category scroller */}
+              <div className={`pointer-events-none absolute left-0 top-0 h-full w-12 transition-opacity hidden md:block ${categoryScroll[c.id]?.atStart ? 'opacity-0' : 'opacity-100'}`} style={{ background: 'linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,0))' }} />
               <button
-                aria-label={`scroll ${c.id} left`}
-                onClick={() => scrollByOffset(categoryRefs.current[c.id], -1)}
-                className={`absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 rounded-full p-2 shadow-md hover:bg-white hidden md:flex items-center justify-center ${categoryScroll[c.id]?.atStart ? 'opacity-30 pointer-events-none' : ''}`}
-              >
+                  aria-label={`scroll ${c.id} left`}
+                  onClick={() => scrollByOffset(categoryRefs.current[c.id], -1)}
+                  className={`absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 rounded-full p-2 shadow-md hover:bg-white hidden md:flex items-center justify-center ${categoryScroll[c.id]?.atStart ? 'opacity-30 pointer-events-none' : ''}`}
+                >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-5 h-5 text-slate-700" fill="none" stroke="currentColor">
                   <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                 </svg>
@@ -173,15 +209,38 @@ export default function App() {
               <div
                 ref={(el) => (categoryRefs.current[c.id] = el)}
                 className="overflow-x-auto"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  const el = categoryRefs.current[c.id];
+                  if (!el) return;
+                  if (e.key === 'ArrowLeft') scrollByOffset(el, -1);
+                  if (e.key === 'ArrowRight') scrollByOffset(el, 1);
+                }}
               >
                 <div className="flex gap-6 px-2">
-                  {(allByCategory[c.id] || []).map(p => (
-                    <div key={p.id} className="reveal flex-shrink-0 min-w-[220px]">
-                      <ProductCard item={p} onAdd={addToCart} />
-                    </div>
-                  ))}
+                    {(allByCategory[c.id] || []).map(p => (
+                      <div key={p.id} className="reveal flex-shrink-0 min-w-[220px]">
+                        <ProductCard item={p} onAdd={addToCart} />
+                      </div>
+                    ))}
+                    {Array.from({ length: extraItems[c.id] || 0 }).map((_, i) => {
+                      const list = allByCategory[c.id] || [];
+                      if (list.length === 0) return null;
+                      const p = list[i % list.length];
+                      const copy = { ...p, id: `${p.id}-more-${i}` };
+                      return (
+                        <div key={copy.id} className="reveal flex-shrink-0 min-w-[220px]">
+                          <ProductCard item={copy} onAdd={addToCart} />
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
+            {/* right gradient mask for category scroller */}
+            <div className={`pointer-events-none absolute right-0 top-0 h-full w-12 transition-opacity hidden md:block ${categoryScroll[c.id]?.atEnd ? 'opacity-0' : 'opacity-100'}`} style={{ background: 'linear-gradient(270deg, rgba(255,255,255,1), rgba(255,255,255,0))' }} />
+                <div className="mt-3 flex justify-end">
+                  <button onClick={() => loadMoreForCategory(c.id, 8)} className="px-3 py-2 rounded bg-slate-100 text-slate-800 text-sm">Load more</button>
+                </div>
               <button
                 aria-label={`scroll ${c.id} right`}
                 onClick={() => scrollByOffset(categoryRefs.current[c.id], 1)}
