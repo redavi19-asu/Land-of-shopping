@@ -1,4 +1,11 @@
+import { useState } from 'react';
+
 export default function ProductCard({ item, onAdd }) {
+  const [qty, setQty] = useState(1);
+  function changeQty(delta) {
+    setQty(prev => Math.max(1, prev + delta));
+  }
+
   return (
     <div className="rounded-xl overflow-hidden border bg-white hover:shadow-glow transition relative">
       {item.badge && (
@@ -20,9 +27,16 @@ export default function ProductCard({ item, onAdd }) {
             </div>
           </div>
         )}
-        <button onClick={() => onAdd(item)} className="mt-3 px-4 py-2 rounded-md bg-brand-600 text-white hover:bg-brand-700">
-          Add to Cart
-        </button>
+        <div className="mt-3 flex items-center gap-3">
+          <div className="inline-flex items-center border rounded-md overflow-hidden">
+            <button aria-label="decrease quantity" onClick={() => changeQty(-1)} className="px-3 py-2 text-slate-700">-</button>
+            <input aria-label="quantity" value={qty} onChange={(e)=> setQty(Math.max(1, Number(e.target.value || 1)))} className="w-12 text-center border-l border-r px-2 py-2" type="number" min="1" />
+            <button aria-label="increase quantity" onClick={() => changeQty(1)} className="px-3 py-2 text-slate-700">+</button>
+          </div>
+          <button onClick={() => onAdd(item, qty)} className="px-4 py-2 rounded-md bg-brand-600 text-white hover:bg-brand-700">
+            Add {qty} to Cart
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -127,12 +127,25 @@ export default function App() {
     };
   }, []);
 
-  function addToCart(item) {
-    setCart(prev => [...prev, item]);
+  function addToCart(item, qty = 1) {
+    setCart(prev => {
+      const existing = prev.find(p => p.id === item.id);
+      if (existing) {
+        return prev.map(p => p.id === item.id ? { ...p, quantity: (p.quantity || 1) + qty } : p);
+      }
+      return [...prev, { ...item, quantity: qty }];
+    });
     setOpenCart(true);
   }
   function removeFromCart(id) {
     setCart(prev => prev.filter(p => p.id !== id));
+  }
+
+  function updateCartQuantity(id, qty) {
+    setCart(prev => {
+      if (qty <= 0) return prev.filter(p => p.id !== id);
+      return prev.map(p => p.id === id ? { ...p, quantity: qty } : p);
+    });
   }
 
   const allByCategory = useMemo(() => {
