@@ -15,3 +15,23 @@
 .scrolly-pin { position: sticky; top: 0; }
 
 body { @apply bg-gradient-to-b from-white to-slate-50; }
+
+/* Promo marquee */
+.promo-marquee { background: linear-gradient(90deg, rgba(255,246,229,0.9), rgba(255,250,240,0.7)); overflow: hidden; }
+.promo-marquee__track { display: inline-block; white-space: nowrap; will-change: transform; animation: marquee 18s linear infinite; }
+@keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%);} }
+
+/* Sale banner flying across */
+.sale-banner { position: absolute; top: 20%; left: -40%; z-index: 50; pointer-events: none; }
+.sale-banner .pill { @apply bg-amber-400 text-white font-bold px-4 py-2 rounded-full shadow-lg; transform: rotate(-12deg); }
+@keyframes flyAcross { 0% { transform: translateX(-120%) translateY(0) rotate(-12deg) scale(.9); opacity: 0; }
+  5% { opacity: 1; }
+  50% { transform: translateX(120vw) translateY(-4vh) rotate(-12deg) scale(1.02); opacity: 1; }
+  100% { transform: translateX(240vw) translateY(-8vh) rotate(-12deg) scale(.9); opacity: 0; }
+}
+.sale-banner.fly { animation: flyAcross 12s ease-in-out infinite; }
+
+/* subtle sparkle for liveliness */
+.sparkle { position: absolute; inset: auto; width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #fff, #ffd700 40%, transparent 60%); filter: drop-shadow(0 2px 6px rgba(0,0,0,0.12)); animation: sparkle 1.8s linear infinite; }
+@keyframes sparkle { 0% { transform: translateY(0) scale(.6); opacity: .9 } 50% { transform: translateY(-8px) scale(1.1); opacity: .6 } 100% { transform: translateY(0) scale(.6); opacity: .9 } }
+
