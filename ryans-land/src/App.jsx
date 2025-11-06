@@ -350,6 +350,7 @@ export default function App() {
         items={cart}
         onClose={()=>setOpenCart(false)}
         onRemove={removeFromCart}
+        onChangeQuantity={updateCartQuantity}
       />
       <Footer />
     </>
