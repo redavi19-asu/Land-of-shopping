@@ -22,7 +22,7 @@ export default function LeftScrolly() {
   }, []);
 
   return (
-    <aside className="left-scrolly hidden md:flex flex-col items-start gap-3 fixed top-1/3 left-6 z-40">
+    <aside className="left-scrolly flex flex-col items-start gap-3 fixed top-1/3 left-6 z-40">
       {items.map(it => (
         <button
           key={it.id}
