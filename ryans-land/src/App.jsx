@@ -22,6 +22,14 @@ export default function App() {
   }, []);
 
   const featured = useMemo(() => products.filter(p => featuredIds.includes(p.id)), []);
+  const featuredRef = useRef(null);
+  const categoryRefs = useRef({});
+
+  function scrollByOffset(el, dir = 1) {
+    if (!el) return;
+    const offset = Math.max(300, Math.round(el.clientWidth * 0.75));
+    el.scrollBy({ left: dir * offset, behavior: 'smooth' });
+  }
 
   function addToCart(item) {
     setCart(prev => [...prev, item]);
@@ -63,15 +71,31 @@ export default function App() {
           </div>
           <a href="#story" className="text-brand-700 hover:underline">How it’s built →</a>
         </div>
-        {/* Horizontal scrollable featured row */}
-        <div className="mt-8 overflow-x-auto">
-          <div className="flex gap-6 px-2">
-            {featured.map(p => (
-              <div key={p.id} className="reveal flex-shrink-0 min-w-[220px]">
-                <ProductCard item={p} onAdd={addToCart} />
-              </div>
-            ))}
+        {/* Horizontal scrollable featured row with chevrons */}
+        <div className="mt-8 relative">
+          <button
+            aria-label="scroll featured left"
+            onClick={() => scrollByOffset(featuredRef.current, -1)}
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 rounded-full p-2 shadow-md hover:bg-white"
+          >
+            ◀
+          </button>
+          <div ref={featuredRef} className="overflow-x-auto">
+            <div className="flex gap-6 px-2">
+              {featured.map(p => (
+                <div key={p.id} className="reveal flex-shrink-0 min-w-[220px]">
+                  <ProductCard item={p} onAdd={addToCart} />
+                </div>
+              ))}
+            </div>
           </div>
+          <button
+            aria-label="scroll featured right"
+            onClick={() => scrollByOffset(featuredRef.current, 1)}
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 rounded-full p-2 shadow-md hover:bg-white"
+          >
+            ▶
+          </button>
         </div>
       </section>
 
@@ -82,15 +106,34 @@ export default function App() {
               <h3 className="text-2xl font-bold">{c.name}</h3>
               <p className="text-slate-600">{c.blurb}</p>
             </div>
-            {/* Horizontal scrollable product list for this category */}
-            <div className="mt-6 overflow-x-auto">
-              <div className="flex gap-6 px-2">
-                {(allByCategory[c.id] || []).map(p => (
-                  <div key={p.id} className="reveal flex-shrink-0 min-w-[220px]">
-                    <ProductCard item={p} onAdd={addToCart} />
-                  </div>
-                ))}
+            {/* Horizontal scrollable product list for this category with chevrons */}
+            <div className="mt-6 relative">
+              <button
+                aria-label={`scroll ${c.id} left`}
+                onClick={() => scrollByOffset(categoryRefs.current[c.id], -1)}
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 rounded-full p-2 shadow-md hover:bg-white"
+              >
+                ◀
+              </button>
+              <div
+                ref={(el) => (categoryRefs.current[c.id] = el)}
+                className="overflow-x-auto"
+              >
+                <div className="flex gap-6 px-2">
+                  {(allByCategory[c.id] || []).map(p => (
+                    <div key={p.id} className="reveal flex-shrink-0 min-w-[220px]">
+                      <ProductCard item={p} onAdd={addToCart} />
+                    </div>
+                  ))}
+                </div>
               </div>
+              <button
+                aria-label={`scroll ${c.id} right`}
+                onClick={() => scrollByOffset(categoryRefs.current[c.id], 1)}
+                className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 rounded-full p-2 shadow-md hover:bg-white"
+              >
+                ▶
+              </button>
             </div>
           </div>
         ))}
