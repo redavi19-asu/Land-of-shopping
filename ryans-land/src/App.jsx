@@ -27,7 +27,21 @@ export default function App() {
   const [featuredAtStart, setFeaturedAtStart] = useState(true);
   const [featuredAtEnd, setFeaturedAtEnd] = useState(false);
   const [categoryScroll, setCategoryScroll] = useState({});
-  const [extraItems, setExtraItems] = useState({});
+  const [extraItems, setExtraItems] = useState(() => {
+    // show some extra items initially for first/last categories and featured
+    const init = { featured: 8 };
+    if (categories && categories.length > 0) {
+      const first = categories[0]?.id;
+      const second = categories[1]?.id;
+      const last = categories[categories.length - 1]?.id;
+      const last2 = categories[categories.length - 2]?.id;
+      if (first) init[first] = 8;
+      if (second) init[second] = 8;
+      if (last) init[last] = 8;
+      if (last2) init[last2] = 8;
+    }
+    return init;
+  });
 
   function scrollByOffset(el, dir = 1) {
     if (!el) return;

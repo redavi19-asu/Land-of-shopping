@@ -31,7 +31,8 @@ export default function Hero({ onShopClick, onCartOpen }) {
 
         <div className="reveal">
           <div className="rounded-2xl border bg-white/70 backdrop-blur p-6 shadow-glow">
-            <img alt="Store preview" src="https://placehold.co/900x600?text=Store+Preview" className="rounded-xl w-full" />
+            {/* use a local seed image so preview appears reliably */}
+            <img alt="Store preview" src="/images/seed1.jpg" className="rounded-xl w-full" />
             <div className="mt-4 text-sm text-slate-500">This is a demo UI. No real checkout — just portfolio swagger.</div>
           </div>
         </div>
