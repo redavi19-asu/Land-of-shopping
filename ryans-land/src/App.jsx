@@ -63,12 +63,15 @@ export default function App() {
           </div>
           <a href="#story" className="text-brand-700 hover:underline">How it’s built →</a>
         </div>
-        <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {featured.map(p => (
-            <div key={p.id} className="reveal">
-              <ProductCard item={p} onAdd={addToCart}/>
-            </div>
-          ))}
+        {/* Horizontal scrollable featured row */}
+        <div className="mt-8 overflow-x-auto">
+          <div className="flex gap-6 px-2">
+            {featured.map(p => (
+              <div key={p.id} className="reveal flex-shrink-0 min-w-[220px]">
+                <ProductCard item={p} onAdd={addToCart} />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -79,12 +82,15 @@ export default function App() {
               <h3 className="text-2xl font-bold">{c.name}</h3>
               <p className="text-slate-600">{c.blurb}</p>
             </div>
-            <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {(allByCategory[c.id] || []).map(p=>(
-                <div key={p.id} className="reveal">
-                  <ProductCard item={p} onAdd={addToCart}/>
-                </div>
-              ))}
+            {/* Horizontal scrollable product list for this category */}
+            <div className="mt-6 overflow-x-auto">
+              <div className="flex gap-6 px-2">
+                {(allByCategory[c.id] || []).map(p => (
+                  <div key={p.id} className="reveal flex-shrink-0 min-w-[220px]">
+                    <ProductCard item={p} onAdd={addToCart} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         ))}
