@@ -4,6 +4,7 @@ import CategoryCard from "./components/CategoryCard.jsx";
 import ProductCard from "./components/ProductCard.jsx";
 import ScrollySection from "./components/ScrollySection.jsx";
 import CartDrawer from "./components/CartDrawer.jsx";
+import StorePage from "./components/StorePage.jsx";
 import { categories, products, featuredIds } from "./data/products.js";
 
 export default function App() {
@@ -69,6 +70,33 @@ export default function App() {
       el.removeEventListener('scroll', handler);
       window.removeEventListener('resize', handler);
     };
+  }, []);
+
+  // autoplay featured carousel slowly (pauses on focus)
+  useEffect(() => {
+    const el = featuredRef.current;
+    if (!el) return;
+    let tid = null;
+    const start = () => {
+      if (tid) return;
+      tid = setInterval(() => {
+        if (!el) return;
+        // only auto-scroll if not at end
+        if (el.scrollLeft + el.clientWidth < el.scrollWidth - 2) {
+          scrollByOffset(el, 1);
+        } else {
+          // snap back to start after reaching end
+          el.scrollTo({ left: 0, behavior: 'smooth' });
+        }
+      }, 4200);
+    };
+    const stop = () => { if (tid) { clearInterval(tid); tid = null; } };
+    el.addEventListener('mouseenter', stop);
+    el.addEventListener('focusin', stop);
+    el.addEventListener('mouseleave', start);
+    el.addEventListener('focusout', start);
+    start();
+    return () => { stop(); el.removeEventListener('mouseenter', stop); el.removeEventListener('focusin', stop); el.removeEventListener('mouseleave', start); el.removeEventListener('focusout', start); };
   }, []);
 
   // update categories scroll state
@@ -201,6 +229,8 @@ export default function App() {
       </section>
 
       <section className="max-w-7xl mx-auto px-6 py-10 space-y-16">
+        {/* Store preview / mock store page */}
+        <StorePage products={products} />
         {categories.map((c)=>(
           <div key={c.id} id={`cat-${c.id}`}>
             <div className="reveal">

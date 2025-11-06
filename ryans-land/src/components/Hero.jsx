@@ -53,7 +53,7 @@ export default function Hero({ onShopClick, onCartOpen }) {
                 <div className="text-slate-600">123 Demo Ave, Suite 100</div>
               </div>
               <div className="flex gap-3 mt-2">
-                <a href="#categories" className="px-4 py-2 rounded-lg bg-brand-600 text-white text-sm">Shop this store</a>
+                <a href="#store" className="px-4 py-2 rounded-lg bg-brand-600 text-white text-sm">Shop this store</a>
                 <button onClick={onCartOpen} className="px-4 py-2 rounded-lg border border-slate-200 text-sm">View cart</button>
               </div>
               <div className="text-xs text-slate-500 mt-1">This is a mock preview of a real storefront — no real orders processed.</div>
