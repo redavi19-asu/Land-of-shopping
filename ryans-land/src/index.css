@@ -77,3 +77,14 @@ body { @apply bg-gradient-to-b from-white to-slate-50; }
   .silver-line { animation: none !important; }
 }
 
+/* Skip link visible on focus */
+.skip-link { position: absolute; left: 1rem; top: 0.75rem; background: #0f172a; color: white; padding: 6px 10px; border-radius: 6px; transform: translateY(-120%); transition: transform .18s ease; z-index: 80; }
+.skip-link:focus { transform: translateY(0%); }
+
+/* focus styles for accessibility */
+.left-scrolly__item:focus { outline: 3px solid rgba(6,182,212,0.18); outline-offset: 3px; }
+.left-scrolly__item:focus-visible { box-shadow: 0 0 0 4px rgba(6,182,212,0.06); }
+
+/* mobile toggle styling tweak */
+/* end */
+

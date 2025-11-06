@@ -3,6 +3,7 @@ import Hero from "./components/Hero.jsx";
 import LeftScrolly from "./components/LeftScrolly.jsx";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
+import SilverLines from "./components/SilverLines.jsx";
 import CategoryCard from "./components/CategoryCard.jsx";
 import ProductCard from "./components/ProductCard.jsx";
 import ScrollySection from "./components/ScrollySection.jsx";
@@ -157,15 +158,7 @@ export default function App() {
     <>
       <Header onCartOpen={()=>setOpenCart(true)} />
 
-      {/* decorative silver lines that loop vertically */}
-      <div className="silver-lines pointer-events-none" aria-hidden>
-        <svg className="silver-line left" viewBox="0 0 120 800" preserveAspectRatio="none">
-          <path d="M20 0 C40 100, 0 200, 20 300 C40 400, 0 500, 20 600 C40 700, 0 800, 20 900" stroke="silver" strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-        <svg className="silver-line right" viewBox="0 0 120 800" preserveAspectRatio="none">
-          <path d="M100 0 C80 100, 120 200, 100 300 C80 400, 120 500, 100 600 C80 700, 120 800, 100 900" stroke="silver" strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </div>
+      <SilverLines intensity={0.16} />
 
       <LeftScrolly />
       <Hero onShopClick={scrollToCategories} onCartOpen={()=>setOpenCart(true)} />
