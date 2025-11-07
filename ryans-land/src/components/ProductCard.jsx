@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import imageManifest from '../data/image-manifest.json';
 
 export default function ProductCard({ item, onAdd }) {
   const [qty, setQty] = useState(1);
@@ -12,15 +13,27 @@ export default function ProductCard({ item, onAdd }) {
         <div className="absolute top-3 left-3 bg-yellow-300 text-xs font-bold px-2 py-1 rounded">{item.badge}</div>
       )}
       {/* responsive images: will use resized variants if available (e.g. image-w400.jpg) */}
-      <img
-        src={item.img}
-        srcSet={`${item.img.replace(/\.(jpg|jpeg|png)$/i, '-w400.$1')} 400w, ${item.img.replace(/\.(jpg|jpeg|png)$/i, '-w800.$1')} 800w, ${item.img} 1200w`}
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        alt={item.title}
-        loading="lazy"
-        decoding="async"
-        className="w-full h-56 object-cover transition-transform duration-200 ease-out hover:scale-105"
-      />
+      {
+        (() => {
+          const base = item.img.split('/').pop();
+          const info = imageManifest[base];
+          const widthAttr = info ? info.width : undefined;
+          const heightAttr = info ? info.height : undefined;
+          return (
+            <img
+              src={item.img}
+              srcSet={`${item.img.replace(/\.(jpg|jpeg|png)$/i, '-w400.$1')} 400w, ${item.img.replace(/\.(jpg|jpeg|png)$/i, '-w800.$1')} 800w, ${item.img} 1200w`}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              alt={item.title}
+              loading="lazy"
+              decoding="async"
+              width={widthAttr}
+              height={heightAttr}
+              className="w-full h-56 object-cover transition-transform duration-200 ease-out hover:scale-105"
+            />
+          );
+        })()
+      }
       <div className="p-4">
         <div className="font-semibold">{item.title}</div>
         <div className="mt-1 text-brand-700 font-bold">${item.price.toFixed(2)}</div>

@@ -1,3 +1,5 @@
+import imageManifest from '../data/image-manifest.json';
+
 export default function Hero({ onShopClick, onCartOpen }) {
   return (
     <header className="relative overflow-hidden">
@@ -55,7 +57,17 @@ export default function Hero({ onShopClick, onCartOpen }) {
           <div className="rounded-2xl border bg-white/70 backdrop-blur p-6 shadow-glow grid md:grid-cols-2 gap-4 items-center">
             {/* store image */}
             <div>
-              <img alt="Store preview" src="images/store.png" className="rounded-xl w-full h-44 object-cover" />
+              {
+                (() => {
+                  const base = 'store.png';
+                  const info = imageManifest[base];
+                  const widthAttr = info ? info.width : undefined;
+                  const heightAttr = info ? info.height : undefined;
+                  return (
+                    <img alt="Store preview" src="images/store.png" width={widthAttr} height={heightAttr} className="rounded-xl w-full h-44 object-cover" />
+                  );
+                })()
+              }
             </div>
             {/* store info */}
             <div className="space-y-2">
