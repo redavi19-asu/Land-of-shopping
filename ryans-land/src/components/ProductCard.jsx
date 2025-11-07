@@ -29,7 +29,7 @@ export default function ProductCard({ item, onAdd }) {
               decoding="async"
               width={widthAttr}
               height={heightAttr}
-              className="w-full h-56 object-cover transition-transform duration-200 ease-out hover:scale-105"
+              className="w-full h-40 sm:h-56 md:h-64 lg:h-72 object-cover transition-transform duration-200 ease-out hover:scale-105"
             />
           );
         })()
@@ -49,13 +49,34 @@ export default function ProductCard({ item, onAdd }) {
             </div>
           </div>
         )}
-        <div className="mt-3 flex items-center gap-3">
-          <div className="inline-flex items-center border rounded-md overflow-hidden">
-            <button aria-label="decrease quantity" onClick={() => changeQty(-1)} className="px-3 py-2 text-slate-700">-</button>
-            <input aria-label="quantity" value={qty} onChange={(e)=> setQty(Math.max(1, Number(e.target.value || 1)))} className="w-12 text-center border-l border-r px-2 py-2" type="number" min="1" />
-            <button aria-label="increase quantity" onClick={() => changeQty(1)} className="px-3 py-2 text-slate-700">+</button>
+        <div className="mt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <div className="inline-flex items-center border rounded-md overflow-hidden text-sm sm:text-base">
+            <button
+              aria-label="decrease quantity"
+              onClick={() => changeQty(-1)}
+              className="px-3 py-3 sm:px-4 sm:py-3 text-slate-700 hover:bg-slate-50 focus:outline-none"
+              style={{minWidth: 44}}
+            >
+              -
+            </button>
+            <input
+              aria-label="quantity"
+              value={qty}
+              onChange={(e)=> setQty(Math.max(1, Number(e.target.value || 1)))}
+              className="w-14 sm:w-16 text-center border-l border-r px-2 py-2 text-base"
+              type="number"
+              min="1"
+            />
+            <button
+              aria-label="increase quantity"
+              onClick={() => changeQty(1)}
+              className="px-3 py-3 sm:px-4 sm:py-3 text-slate-700 hover:bg-slate-50 focus:outline-none"
+              style={{minWidth: 44}}
+            >
+              +
+            </button>
           </div>
-          <button onClick={() => onAdd(item, qty)} className="px-4 py-2 rounded-md bg-brand-600 text-white hover:bg-brand-700">
+          <button onClick={() => onAdd(item, qty)} className="px-4 py-3 rounded-md bg-brand-600 text-white hover:bg-brand-700 w-full sm:w-auto text-center">
             Add {qty} to Cart
           </button>
         </div>
