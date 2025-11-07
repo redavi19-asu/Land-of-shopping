@@ -126,3 +126,14 @@ html { transition: background .25s ease, color .25s ease; }
   color: var(--text) !important;
 }
 
+/* Make all headings brighter in dark mode for stronger contrast */
+.dark-theme h1,
+.dark-theme h2,
+.dark-theme h3,
+.dark-theme h4,
+.dark-theme h5,
+.dark-theme h6 {
+  color: #ffffff !important;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+}
+

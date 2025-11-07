@@ -36,7 +36,7 @@ export default function Hero({ onShopClick, onCartOpen }) {
         <div className="pill">FLASH DEAL · 20% OFF NOW</div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 pt-10 pb-20 grid md:grid-cols-2 gap-10 items-center">
+  <div className="max-w-7xl mx-auto px-6 md:pl-28 pt-10 pb-20 grid md:grid-cols-2 gap-10 items-center">
         <div className="reveal">
           <h1 className="text-4xl md:text-6xl font-black leading-tight">
             A clean, modern storefront for <span className="text-brand-600">budget-smart</span> shopping.
