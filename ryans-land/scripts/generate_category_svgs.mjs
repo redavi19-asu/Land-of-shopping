@@ -14,9 +14,21 @@ const categories = [
   { id: 'kitchen', name: 'Kitchen' },
   { id: 'outdoors', name: 'Outdoors' },
   { id: 'pets', name: 'Pet Supplies' },
+  // additional categories
+  { id: 'clothing', name: 'Clothing' },
+  { id: 'baby', name: 'Baby' },
+  { id: 'books', name: 'Books' },
+  { id: 'office', name: 'Office' },
+  { id: 'home-decor', name: 'Home Decor' },
+  { id: 'sports', name: 'Sports' },
+  { id: 'automotive', name: 'Automotive' },
+  { id: 'beauty', name: 'Beauty' }
 ];
 
-const colors = [ '#0ea5e9', '#34d399', '#f59e0b', '#f97316', '#a78bfa', '#ef4444', '#06b6d4', '#84cc16', '#f472b6' ];
+const colors = [
+  '#0ea5e9', '#34d399', '#f59e0b', '#f97316', '#a78bfa', '#ef4444', '#06b6d4', '#84cc16', '#f472b6',
+  '#06b6d4', '#7c3aed', '#0f766e', '#dc2626', '#0891b2', '#f43f5e'
+];
 
 for (let i = 0; i < categories.length; i++) {
   const cat = categories[i];
@@ -26,7 +38,7 @@ for (let i = 0; i < categories.length; i++) {
     `<rect width="100%" height="100%" fill="${bg}"/>\n` +
     `<g fill="white" font-family="Inter, Roboto, system-ui, -apple-system, 'Helvetica Neue', Arial" font-weight="700">\n` +
     `<text x="50%" y="45%" font-size="64" text-anchor="middle">${escapeXml(cat.name)}</text>\n` +
-    `<text x="50%" y="62%" font-size="36" text-anchor="middle" opacity="0.9">${escapeXml(cat.blurb || '')}</text>\n` +
+  `<text x="50%" y="62%" font-size="36" text-anchor="middle" opacity="0.9">${escapeXml(cat.blurb || '')}</text>\n` +
     `</g>\n` +
     `</svg>`;
 

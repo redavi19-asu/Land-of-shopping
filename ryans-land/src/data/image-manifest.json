@@ -2934,4 +2934,45 @@
       }
     }
   }
+  ,
+  "c-clothing.svg": {
+    "width": 1200,
+    "height": 800,
+    "variants": {}
+  },
+  "c-baby.svg": {
+    "width": 1200,
+    "height": 800,
+    "variants": {}
+  },
+  "c-books.svg": {
+    "width": 1200,
+    "height": 800,
+    "variants": {}
+  },
+  "c-office.svg": {
+    "width": 1200,
+    "height": 800,
+    "variants": {}
+  },
+  "c-home-decor.svg": {
+    "width": 1200,
+    "height": 800,
+    "variants": {}
+  },
+  "c-sports.svg": {
+    "width": 1200,
+    "height": 800,
+    "variants": {}
+  },
+  "c-automotive.svg": {
+    "width": 1200,
+    "height": 800,
+    "variants": {}
+  },
+  "c-beauty.svg": {
+    "width": 1200,
+    "height": 800,
+    "variants": {}
+  }
 }

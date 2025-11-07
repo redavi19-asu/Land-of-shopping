@@ -5,12 +5,19 @@ export default function CategoryCard({ item }) {
   const info = imageManifest[base];
   const widthAttr = info ? info.width : undefined;
   const heightAttr = info ? info.height : undefined;
+  const extMatch = base && base.match(/\.([a-zA-Z0-9]+)$/);
+  const ext = extMatch ? extMatch[1].toLowerCase() : null;
+  const isSvg = ext === 'svg';
+
+  const srcSet = isSvg
+    ? undefined
+    : `${item.img.replace(/\.(jpg|jpeg|png|svg)$/i, '-w400.$1')} 400w, ${item.img.replace(/\.(jpg|jpeg|png|svg)$/i, '-w800.$1')} 800w, ${item.img} 1200w`;
 
   return (
     <a href={`#cat-${item.id}`} className="group block rounded-xl overflow-hidden border bg-white hover:shadow-glow transition">
       <img
         src={item.img}
-        srcSet={`${item.img.replace(/\.(jpg|jpeg|png|svg)$/i, '-w400.$1')} 400w, ${item.img.replace(/\.(jpg|jpeg|png|svg)$/i, '-w800.$1')} 800w, ${item.img} 1200w`}
+        {...(srcSet ? { srcSet } : {})}
         sizes="(max-width: 640px) 100vw, 33vw"
         alt={item.name}
         width={widthAttr}

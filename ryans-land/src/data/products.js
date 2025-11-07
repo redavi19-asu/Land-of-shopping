@@ -8,6 +8,15 @@ export const categories = [
   { id: "kitchen", name: "Kitchen", blurb: "Cookware & utensils", img: "images/c-kitchen.svg" },
   { id: "outdoors", name: "Outdoors", blurb: "Garden, camping & more", img: "images/c-outdoors.svg" },
   { id: "pets", name: "Pet Supplies", blurb: "Treats, toys and care", img: "images/c-pets.svg" },
+  // new categories (placeholders)
+  { id: "clothing", name: "Clothing", blurb: "Basics & seasonal wear", img: "images/c-clothing.svg" },
+  { id: "baby", name: "Baby", blurb: "Care & essentials for little ones", img: "images/c-baby.svg" },
+  { id: "books", name: "Books", blurb: "Fiction, non-fiction & kids", img: "images/c-books.svg" },
+  { id: "office", name: "Office", blurb: "Supplies & desk essentials", img: "images/c-office.svg" },
+  { id: "home-decor", name: "Home Decor", blurb: "Small accents & wall art", img: "images/c-home-decor.svg" },
+  { id: "sports", name: "Sports", blurb: "Outdoor & gym gear", img: "images/c-sports.svg" },
+  { id: "automotive", name: "Automotive", blurb: "Car care & accessories", img: "images/c-automotive.svg" },
+  { id: "beauty", name: "Beauty", blurb: "Cosmetics & skincare", img: "images/c-beauty.svg" }
 ];
 
 // Expanded product catalogue to provide lots of items for horizontal scrollers
