@@ -6,17 +6,19 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+  "resize-images": "node ./scripts/resize_images.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.0",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.14",
-    "vite": "^5.4.11",
-    "@vitejs/plugin-react": "^5.0.0"
+    "vite": "^5.4.11"
   }
 }

@@ -11,7 +11,16 @@ export default function ProductCard({ item, onAdd }) {
       {item.badge && (
         <div className="absolute top-3 left-3 bg-yellow-300 text-xs font-bold px-2 py-1 rounded">{item.badge}</div>
       )}
-  <img src={item.img} alt={item.title} loading="lazy" decoding="async" className="w-full h-56 object-cover transition-transform duration-200 ease-out hover:scale-105" />
+      {/* responsive images: will use resized variants if available (e.g. image-w400.jpg) */}
+      <img
+        src={item.img}
+        srcSet={`${item.img.replace(/\.(jpg|jpeg|png)$/i, '-w400.$1')} 400w, ${item.img.replace(/\.(jpg|jpeg|png)$/i, '-w800.$1')} 800w, ${item.img} 1200w`}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        alt={item.title}
+        loading="lazy"
+        decoding="async"
+        className="w-full h-56 object-cover transition-transform duration-200 ease-out hover:scale-105"
+      />
       <div className="p-4">
         <div className="font-semibold">{item.title}</div>
         <div className="mt-1 text-brand-700 font-bold">${item.price.toFixed(2)}</div>
