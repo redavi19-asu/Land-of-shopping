@@ -1,13 +1,13 @@
 export const categories = [
-  { id: "dollar-deals", name: "Dollar Deals", blurb: "Budget-friendly basics", img: "images/c-dollar-deals.jpg" },
-  { id: "household", name: "Household", blurb: "Cleaners, paper goods, kitchen", img: "images/c-household.jpg" },
-  { id: "snacks", name: "Snacks & Drinks", blurb: "Chips, candy, sodas", img: "images/c-snacks.jpg" },
-  { id: "health", name: "Health & Beauty", blurb: "Personal care essentials", img: "images/c-health.jpg" },
-  { id: "electronics", name: "Electronics", blurb: "Affordable gadgets & accessories", img: "images/c-electronics.jpg" },
-  { id: "toys", name: "Toys & Games", blurb: "Fun for all ages", img: "images/c-toys.jpg" },
-  { id: "kitchen", name: "Kitchen", blurb: "Cookware & utensils", img: "images/c-kitchen.jpg" },
-  { id: "outdoors", name: "Outdoors", blurb: "Garden, camping & more", img: "images/c-outdoors.jpg" },
-  { id: "pets", name: "Pet Supplies", blurb: "Treats, toys and care", img: "images/c-pets.jpg" },
+  { id: "dollar-deals", name: "Dollar Deals", blurb: "Budget-friendly basics", img: "images/c-dollar-deals.svg" },
+  { id: "household", name: "Household", blurb: "Cleaners, paper goods, kitchen", img: "images/c-household.svg" },
+  { id: "snacks", name: "Snacks & Drinks", blurb: "Chips, candy, sodas", img: "images/c-snacks.svg" },
+  { id: "health", name: "Health & Beauty", blurb: "Personal care essentials", img: "images/c-health.svg" },
+  { id: "electronics", name: "Electronics", blurb: "Affordable gadgets & accessories", img: "images/c-electronics.svg" },
+  { id: "toys", name: "Toys & Games", blurb: "Fun for all ages", img: "images/c-toys.svg" },
+  { id: "kitchen", name: "Kitchen", blurb: "Cookware & utensils", img: "images/c-kitchen.svg" },
+  { id: "outdoors", name: "Outdoors", blurb: "Garden, camping & more", img: "images/c-outdoors.svg" },
+  { id: "pets", name: "Pet Supplies", blurb: "Treats, toys and care", img: "images/c-pets.svg" },
 ];
 
 // Expanded product catalogue to provide lots of items for horizontal scrollers
