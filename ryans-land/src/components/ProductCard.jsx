@@ -20,17 +20,20 @@ export default function ProductCard({ item, onAdd }) {
           const widthAttr = info ? info.width : undefined;
           const heightAttr = info ? info.height : undefined;
           return (
-            <img
-              src={item.img}
-              srcSet={`${item.img.replace(/\.(jpg|jpeg|png)$/i, '-w400.$1')} 400w, ${item.img.replace(/\.(jpg|jpeg|png)$/i, '-w800.$1')} 800w, ${item.img} 1200w`}
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              alt={item.title}
-              loading="lazy"
-              decoding="async"
-              width={widthAttr}
-              height={heightAttr}
-              className="w-full h-40 sm:h-48 md:h-56 lg:h-64 object-cover transition-transform duration-200 ease-out hover:scale-105"
-            />
+            <div className="w-full">
+              <img
+                src={item.img}
+                srcSet={`${item.img.replace(/\.(jpg|jpeg|png)$/i, '-w400.$1')} 400w, ${item.img.replace(/\.(jpg|jpeg|png)$/i, '-w800.$1')} 800w, ${item.img} 1200w`}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+                alt={item.title}
+                loading="lazy"
+                decoding="async"
+                width={widthAttr}
+                height={heightAttr}
+                className="w-full object-cover transition-transform duration-200 ease-out hover:scale-105"
+                style={{ aspectRatio: '4 / 3' }}
+              />
+            </div>
           );
         })()
       }
@@ -50,7 +53,7 @@ export default function ProductCard({ item, onAdd }) {
           </div>
         )}
         <div className="mt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-          <div className="inline-flex items-center border rounded-md overflow-hidden text-sm sm:text-base">
+          <div className="inline-flex w-full sm:w-auto items-center border rounded-md overflow-hidden text-sm sm:text-base">
             <button
               aria-label="decrease quantity"
               onClick={() => changeQty(-1)}

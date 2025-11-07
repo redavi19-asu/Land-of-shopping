@@ -22,7 +22,7 @@ export default function StorePage({ products = [], onAdd }) {
         <div className="md:col-span-2">
           <h4 className="text-lg font-bold">Store Highlights</h4>
           <p className="text-sm text-slate-600">A curated snapshot of products available in this demo store.</p>
-            <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {products.slice(0, 12).map(p => (
               <ProductCard key={p.id} item={p} onAdd={onAdd} />
             ))}

@@ -15,15 +15,18 @@ export default function CategoryCard({ item }) {
 
   return (
     <a href={`#cat-${item.id}`} className="group block rounded-xl overflow-hidden border bg-white hover:shadow-glow transition">
-        <img
-        src={item.img}
-        {...(srcSet ? { srcSet } : {})}
-        sizes="(max-width: 640px) 100vw, 33vw"
-        alt={item.name}
-        width={widthAttr}
-        height={heightAttr}
-        className="w-full h-32 sm:h-40 md:h-44 lg:h-48 object-cover"
-      />
+        <div className="w-full">
+          <img
+            src={item.img}
+            {...(srcSet ? { srcSet } : {})}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            alt={item.name}
+            width={widthAttr}
+            height={heightAttr}
+            className="w-full object-cover"
+            style={{ aspectRatio: '4 / 3' }}
+          />
+        </div>
       <div className="p-4">
         <div className="font-semibold">{item.name}</div>
         <div className="text-sm text-slate-600">{item.blurb}</div>
