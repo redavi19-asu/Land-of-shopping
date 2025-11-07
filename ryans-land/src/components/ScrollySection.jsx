@@ -12,7 +12,13 @@ export default function ScrollySection() {
           <div className="rounded-2xl bg-white border shadow-glow p-8">
             <h2 className="text-3xl md:text-4xl font-black">How this demo works</h2>
             <p className="mt-3 text-slate-600">Scroll to see the steps. The left panel stays pinned while the right side advances.</p>
-            <img className="mt-6 rounded-xl" src="https://placehold.co/800x500?text=React+%2B+Tailwind" alt="Stack" width="800" height="500" />
+            <img
+              className="mt-6 rounded-xl w-full max-w-lg h-auto"
+              src="https://placehold.co/800x500?text=React+%2B+Tailwind"
+              alt="Stack"
+              width="800"
+              height="500"
+            />
           </div>
         </div>
         <div className="space-y-10">

@@ -29,7 +29,7 @@ export default function ProductCard({ item, onAdd }) {
               decoding="async"
               width={widthAttr}
               height={heightAttr}
-              className="w-full h-40 sm:h-56 md:h-64 lg:h-72 object-cover transition-transform duration-200 ease-out hover:scale-105"
+              className="w-full h-40 sm:h-48 md:h-56 lg:h-64 object-cover transition-transform duration-200 ease-out hover:scale-105"
             />
           );
         })()

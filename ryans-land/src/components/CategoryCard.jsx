@@ -15,14 +15,14 @@ export default function CategoryCard({ item }) {
 
   return (
     <a href={`#cat-${item.id}`} className="group block rounded-xl overflow-hidden border bg-white hover:shadow-glow transition">
-      <img
+        <img
         src={item.img}
         {...(srcSet ? { srcSet } : {})}
         sizes="(max-width: 640px) 100vw, 33vw"
         alt={item.name}
         width={widthAttr}
         height={heightAttr}
-        className="w-full h-48 object-cover"
+        className="w-full h-32 sm:h-40 md:h-44 lg:h-48 object-cover"
       />
       <div className="p-4">
         <div className="font-semibold">{item.name}</div>
