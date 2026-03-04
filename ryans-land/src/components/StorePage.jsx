@@ -7,7 +7,7 @@ export default function StorePage({ products = [], onAdd }) {
         <div className="md:col-span-1">
           <div className="rounded-2xl overflow-hidden border p-4 bg-white">
             <img src="images/store.png" alt="Storefront" className="w-full h-44 object-cover rounded-md" />
-            <h3 className="mt-4 text-xl font-bold">Ryan’s Land — Demo Store</h3>
+            <h3 className="mt-4 text-xl font-bold">Land of Shopping — Demo Store</h3>
             <div className="text-sm text-slate-600 mt-2">Convenience, snacks, home goods. Open 8am–10pm.</div>
             <div className="mt-4 text-sm text-slate-700">
               <div className="font-semibold">123 Demo Ave, Suite 100</div>

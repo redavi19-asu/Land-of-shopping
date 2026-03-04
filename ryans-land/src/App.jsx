@@ -336,7 +336,7 @@ export default function App() {
 
       <footer className="border-t">
         <div className="max-w-7xl mx-auto px-6 py-10 text-sm text-slate-600 flex flex-col md:flex-row gap-3 items-center justify-between">
-          <div>© {new Date().getFullYear()} Ryan’s Land — demo storefront</div>
+          <div>© {new Date().getFullYear()} Land of Shopping — demo storefront</div>
           <div className="flex gap-4">
             <a className="hover:text-brand-700" href="#categories">Categories</a>
             <a className="hover:text-brand-700" href="#featured">Featured</a>

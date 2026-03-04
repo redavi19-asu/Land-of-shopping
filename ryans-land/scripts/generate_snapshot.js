@@ -16,11 +16,11 @@ const html = `<!doctype html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Ryan's Land — Snapshot</title>
+<title>Land of Shopping — Snapshot</title>
 <style>body{background:#f8fafc;padding:30px;font-family:Inter,system-ui,Arial} .grid{display:flex;flex-wrap:wrap;max-width:1200px;margin:0 auto}</style>
 </head>
 <body>
-  <h1>Ryan's Land — Product Snapshot</h1>
+  <h1>Land of Shopping — Product Snapshot</h1>
   <div class="grid">
     ${rows}
   </div>

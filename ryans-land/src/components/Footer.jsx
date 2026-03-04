@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="site-footer border-t mt-12">
       <div className="max-w-7xl mx-auto px-6 py-10 text-sm text-slate-600 grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
-          <div className="font-bold">Ryan's Land</div>
+          <div className="font-bold">Land of Shopping</div>
           <div className="mt-2">A tiny demo storefront — built for fun.</div>
         </div>
         <div>

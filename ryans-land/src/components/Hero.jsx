@@ -6,7 +6,7 @@ export default function Hero({ onShopClick, onCartOpen }) {
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(1200px_500px_at_50%_-20%,rgba(25,159,255,.18),transparent)]" />
       <nav className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
         <a href="#" className="font-black text-xl tracking-tight">
-          <span className="text-brand-600">Ryan’s</span> Land
+          <span className="text-brand-600">Land of</span> Shopping
         </a>
         <div className="flex gap-4">
           <a href="#categories" className="text-sm hover:text-brand-600">Categories</a>
@@ -73,7 +73,7 @@ export default function Hero({ onShopClick, onCartOpen }) {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="font-bold text-lg">Ryan’s Land - Demo Store</div>
+                  <div className="font-bold text-lg">Land of Shopping - Demo Store</div>
                   <div className="text-sm text-slate-600">Convenience • Snacks • Home goods</div>
                 </div>
                 <div className="text-right">
