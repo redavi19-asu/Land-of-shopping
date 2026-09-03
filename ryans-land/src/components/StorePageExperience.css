@@ -1,0 +1,66 @@
+.los-world { position: relative; }
+.los-world__shell { --aisle-accent:#67e8f9; position:relative; overflow:hidden; border:1px solid rgba(255,255,255,.08); border-radius:36px; padding:clamp(1rem,2.5vw,2.2rem); color:#f8fafc; background:radial-gradient(circle at 75% 12%, color-mix(in srgb,var(--aisle-accent) 18%, transparent), transparent 28%),linear-gradient(135deg,#050b13 0%,#091522 52%,#07101a 100%); box-shadow:0 40px 110px rgba(2,6,23,.3); transition:background .45s ease; }
+.los-world__shell::before { content:""; position:absolute; inset:0; pointer-events:none; opacity:.2; background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:36px 36px; mask-image:linear-gradient(to bottom,#000 10%,transparent 80%); }
+.los-world__topline,.los-world__intro,.los-world__floor,.los-shelf-wrap,.los-world__footer { position:relative; z-index:1; }
+.los-world__topline { display:flex; justify-content:space-between; gap:1rem; color:rgba(255,255,255,.5); font-size:.68rem; font-weight:900; letter-spacing:.16em; }
+.los-world__eyebrow { display:flex; align-items:center; gap:.55rem; }
+.los-world__live-dot,.los-world__pulse span,.los-spotlight__open span { width:.5rem; height:.5rem; border-radius:999px; background:var(--aisle-accent); box-shadow:0 0 18px var(--aisle-accent); }
+.los-world__intro { display:grid; grid-template-columns:1fr .8fr; gap:2rem; align-items:end; padding:3rem 0 2rem; }
+.los-world__micro { color:var(--aisle-accent); font-size:.7rem; font-weight:950; letter-spacing:.24em; }
+.los-world__intro h3 { margin:.4rem 0 0; font-size:clamp(3rem,7vw,6.5rem); line-height:.88; letter-spacing:-.065em; font-weight:950; color:white; }
+.los-world__intro>p { max-width:550px; justify-self:end; color:rgba(226,232,240,.62); line-height:1.75; }
+.los-world__floor { display:grid; grid-template-columns:280px 1fr; gap:1rem; min-height:620px; }
+.los-aisles { display:flex; flex-direction:column; gap:.55rem; padding:1rem; border:1px solid rgba(255,255,255,.08); border-radius:26px; background:rgba(255,255,255,.035); }
+.los-aisles__sign { padding:.35rem .55rem 1rem; color:rgba(255,255,255,.35); font-size:.62rem; font-weight:900; letter-spacing:.18em; }
+.los-aisle { display:grid; grid-template-columns:34px 1fr 22px; gap:.65rem; align-items:center; width:100%; min-height:72px; padding:.8rem; border:1px solid transparent; border-radius:18px; text-align:left; color:white; background:rgba(255,255,255,.025); transition:transform .2s ease,border-color .2s ease,background .2s ease; }
+.los-aisle:hover { transform:translateX(4px); background:rgba(255,255,255,.06); }
+.los-aisle--active { border-color:color-mix(in srgb,var(--aisle-accent) 48%,transparent); background:linear-gradient(100deg,color-mix(in srgb,var(--aisle-accent) 15%,transparent),rgba(255,255,255,.035)); }
+.los-aisle__number { display:grid; place-items:center; width:34px; height:34px; border-radius:12px; background:rgba(255,255,255,.06); color:var(--aisle-accent); font-size:.72rem; font-weight:950; }
+.los-aisle__copy strong,.los-aisle__copy small { display:block; }
+.los-aisle__copy strong { font-size:.9rem; }
+.los-aisle__copy small { margin-top:.18rem; color:rgba(255,255,255,.38); font-size:.66rem; }
+.los-aisle__arrow { color:var(--aisle-accent); }
+.los-spotlight { display:grid; grid-template-columns:1.25fr .75fr; gap:1rem; }
+.los-spotlight__scene,.los-find { position:relative; overflow:hidden; border-radius:28px; border:1px solid rgba(255,255,255,.08); background:#07111d; }
+.los-spotlight__scene { min-height:620px; }
+.los-spotlight__store { width:100%; height:100%; min-height:620px; object-fit:cover; transform:scale(1.02); transition:transform .8s ease; }
+.los-spotlight__scene:hover .los-spotlight__store { transform:scale(1.055); }
+.los-spotlight__veil { position:absolute; inset:0; background:linear-gradient(to bottom,rgba(2,6,23,.06),rgba(2,6,23,.18) 42%,rgba(2,6,23,.9)); }
+.los-spotlight__scan { position:absolute; left:0; right:0; height:2px; top:15%; background:linear-gradient(90deg,transparent,var(--aisle-accent),transparent); opacity:.45; animation:losScan 5s ease-in-out infinite; }
+@keyframes losScan { 0%,100%{transform:translateY(0);opacity:.12} 50%{transform:translateY(390px);opacity:.55} }
+.los-spotlight__open { position:absolute; top:1rem; left:1rem; display:flex; align-items:center; gap:.55rem; border:1px solid rgba(255,255,255,.12); border-radius:999px; padding:.55rem .75rem; background:rgba(3,10,18,.7); color:white; font-size:.62rem; font-weight:950; letter-spacing:.14em; }
+.los-spotlight__title { position:absolute; left:1.2rem; right:1.2rem; bottom:1.2rem; display:flex; gap:1rem; align-items:end; }
+.los-spotlight__title>span { font-size:clamp(3rem,7vw,7rem); line-height:.8; font-weight:950; color:var(--aisle-accent); opacity:.9; }
+.los-spotlight__title small,.los-spotlight__title strong { display:block; }
+.los-spotlight__title small { color:rgba(255,255,255,.5); font-size:.62rem; font-weight:900; letter-spacing:.2em; }
+.los-spotlight__title strong { margin-top:.3rem; font-size:clamp(1.8rem,4vw,3.4rem); line-height:.95; letter-spacing:-.04em; color:white; }
+.los-find { display:flex; flex-direction:column; background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035)); }
+.los-find__image-wrap { position:relative; min-height:290px; flex:1; background:white; }
+.los-find__image { width:100%; height:100%; min-height:290px; object-fit:cover; }
+.los-find__tag { position:absolute; top:1rem; left:1rem; border-radius:999px; padding:.5rem .7rem; background:#07111d; color:var(--aisle-accent); font-size:.58rem; font-weight:950; letter-spacing:.14em; }
+.los-find__body { padding:1rem; }
+.los-find__body small { color:var(--aisle-accent); font-size:.58rem; font-weight:950; letter-spacing:.16em; }
+.los-find__body h4 { margin:.3rem 0 0; color:white; font-size:1.15rem; line-height:1.2; }
+.los-find__price { display:block; margin:1rem 0; color:white; font-size:2rem; }
+.los-find__actions { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+.los-find__add,.los-find__next { padding:.75rem; border-radius:13px; font-size:.75rem; font-weight:900; }
+.los-find__add { background:var(--aisle-accent); color:#03101a; }
+.los-find__next { border:1px solid rgba(255,255,255,.12); color:white; background:rgba(255,255,255,.05); }
+.los-shelf-wrap { margin-top:1rem; border:1px solid rgba(255,255,255,.08); border-radius:26px; padding:1rem; background:rgba(255,255,255,.025); }
+.los-shelf__head { display:flex; align-items:end; justify-content:space-between; gap:1rem; padding:.25rem .25rem 1rem; }
+.los-shelf__head span { color:var(--aisle-accent); font-size:.6rem; font-weight:950; letter-spacing:.18em; }
+.los-shelf__head h4 { margin:.2rem 0 0; color:white; font-size:1.55rem; }
+.los-shelf__head p { color:rgba(255,255,255,.42); font-size:.72rem; }
+.los-shelf { display:flex; gap:.8rem; overflow-x:auto; padding-bottom:.35rem; scrollbar-width:thin; }
+.los-shelf__item { min-width:220px; border-radius:18px; transition:transform .2s ease,box-shadow .2s ease; }
+.los-shelf__item:hover,.los-shelf__item--hot { transform:translateY(-4px); box-shadow:0 0 0 1px color-mix(in srgb,var(--aisle-accent) 34%,transparent),0 18px 45px rgba(0,0,0,.22); }
+.los-world__footer { display:grid; grid-template-columns:1fr 1fr auto; gap:1rem; align-items:center; padding:1.3rem .2rem .1rem; }
+.los-world__pulse { display:flex; gap:.55rem; align-items:center; color:rgba(255,255,255,.5); font-size:.62rem; font-weight:900; letter-spacing:.14em; }
+.los-world__stats { display:flex; gap:.55rem; align-items:baseline; color:rgba(255,255,255,.42); font-size:.72rem; }
+.los-world__stats strong { color:white; font-size:1.35rem; }
+.los-world__all { display:flex; align-items:center; gap:.7rem; border-radius:999px; padding:.85rem 1.1rem; background:var(--aisle-accent); color:#04111d; font-size:.78rem; font-weight:950; transition:transform .2s ease; }
+.los-world__all:hover { transform:translateY(-2px); }
+@media (max-width:1024px){.los-world__floor{grid-template-columns:1fr}.los-aisles{display:grid;grid-template-columns:repeat(3,1fr)}.los-aisles__sign{grid-column:1/-1}.los-spotlight{grid-template-columns:1fr .7fr}.los-world__footer{grid-template-columns:1fr auto}.los-world__stats{display:none}}
+@media (max-width:760px){.los-world__shell{border-radius:24px}.los-world__counter{display:none}.los-world__intro{grid-template-columns:1fr;padding:2rem 0 1.4rem}.los-world__intro>p{justify-self:start}.los-world__intro h3{font-size:3.4rem}.los-aisles{display:flex;flex-direction:row;overflow-x:auto;padding:.7rem}.los-aisles__sign{display:none}.los-aisle{min-width:190px}.los-spotlight{grid-template-columns:1fr}.los-spotlight__scene,.los-spotlight__store{min-height:430px}.los-find{display:grid;grid-template-columns:.9fr 1.1fr}.los-find__image-wrap,.los-find__image{min-height:220px}.los-world__footer{grid-template-columns:1fr}.los-world__stats{display:flex}.los-world__all{justify-content:center}.los-spotlight__scan{display:none}}
+@media (max-width:520px){.los-world{padding-left:.75rem!important;padding-right:.75rem!important}.los-world__shell{padding:.8rem}.los-world__intro h3{font-size:2.9rem}.los-find{display:block}.los-find__image-wrap,.los-find__image{min-height:240px}.los-shelf__item{min-width:190px}.los-spotlight__title>span{font-size:3.5rem}.los-spotlight__title strong{font-size:1.8rem}}
+@media (prefers-reduced-motion:reduce){.los-spotlight__scan{animation:none}.los-spotlight__store,.los-aisle,.los-world__all,.los-shelf__item{transition:none}}
