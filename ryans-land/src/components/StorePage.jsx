@@ -1,31 +1,64 @@
 import ProductCard from "./ProductCard.jsx";
 
 export default function StorePage({ products = [], onAdd }) {
+  const previewProducts = products.slice(0, 8);
+
   return (
-    <section id="store" className="max-w-7xl mx-auto px-6 py-16">
-      <div className="reveal grid md:grid-cols-3 gap-6 items-start">
-        <div className="md:col-span-1">
-          <div className="rounded-2xl overflow-hidden border p-4 bg-white">
-            <img src="images/store.png" alt="Storefront" className="w-full h-44 object-cover rounded-md" />
-            <h3 className="mt-4 text-xl font-bold">Land of Shopping — Demo Store</h3>
-            <div className="text-sm text-slate-600 mt-2">Convenience, snacks, home goods. Open 8am–10pm.</div>
-            <div className="mt-4 text-sm text-slate-700">
-              <div className="font-semibold">123 Demo Ave, Suite 100</div>
-              <div className="text-xs text-slate-500">Phone: (555) 123-4567</div>
-            </div>
-            <div className="mt-4">
-              <button className="px-4 py-2 rounded bg-brand-600 text-white">Browse inventory</button>
-            </div>
+    <section id="store" className="store-experience max-w-7xl mx-auto px-6 py-20 md:py-28">
+      <div className="reveal store-experience__shell">
+        <div className="store-experience__intro">
+          <div>
+            <p className="store-section-label">ENTER THE STORE</p>
+            <h3 className="store-experience__title">A storefront that feels alive before you buy anything.</h3>
           </div>
+          <p className="store-experience__copy">
+            Think neighborhood convenience store meets digital discovery wall. Browse fast, catch a deal, add it to the bag, keep moving.
+          </p>
         </div>
 
-        <div className="md:col-span-2">
-          <h4 className="text-lg font-bold">Store Highlights</h4>
-          <p className="text-sm text-slate-600">A curated snapshot of products available in this demo store.</p>
-            <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {products.slice(0, 12).map(p => (
-              <ProductCard key={p.id} item={p} onAdd={onAdd} />
-            ))}
+        <div className="store-experience__grid">
+          <div className="store-experience__scene">
+            <img src="images/store.png" alt="Land of Shopping storefront" className="store-experience__scene-image" />
+            <div className="store-experience__scene-overlay" />
+            <div className="store-experience__status"><span /> STORE OPEN · 8AM–10PM</div>
+            <div className="store-experience__scene-copy">
+              <p>LAND OF SHOPPING</p>
+              <h4>Come for the essentials. Stay for the unexpected.</h4>
+              <div className="store-experience__meta">
+                <span>Local pickup</span>
+                <span>Fresh deals</span>
+                <span>Quick checkout</span>
+              </div>
+            </div>
+            <div className="store-experience__radar" aria-hidden="true"><i /><i /><i /></div>
+          </div>
+
+          <div className="store-experience__inventory">
+            <div className="store-experience__inventory-head">
+              <div>
+                <p className="store-section-label">AISLE RADAR</p>
+                <h4>What’s moving right now</h4>
+              </div>
+              <div className="inventory-live"><span /> LIVE</div>
+            </div>
+
+            <div className="store-experience__mini-grid">
+              {previewProducts.map((p, index) => (
+                <div key={p.id} className={`store-product-slot ${index === 0 ? "store-product-slot--featured" : ""}`}>
+                  <ProductCard item={p} onAdd={onAdd} />
+                </div>
+              ))}
+            </div>
+
+            <div className="store-experience__footer">
+              <div>
+                <strong>{products.length}+</strong>
+                <span>items in rotation</span>
+              </div>
+              <button onClick={() => document.getElementById("categories")?.scrollIntoView({ behavior: "smooth" })} className="shop-primary-cta">
+                Browse every aisle <span aria-hidden="true">→</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
