@@ -1,64 +1,64 @@
 import { useEffect, useState } from "react";
 import "./HeroSpecial.css";
 
-const lanes = [
-  ["$1 ZONE", "Dollar Deals"],
-  ["SNACK RUN", "Snacks & Drinks"],
-  ["PLUG IN", "Electronics"],
-  ["HOME RUN", "Household"],
+const departments = [
+  { tag: "$1 DEPARTMENT", name: "Dollar Market", sub: "Everyday steals", icon: "01", items: ["Pantry", "Cleaning", "Snacks"] },
+  { tag: "FASHION", name: "The Wardrobe", sub: "Men · Women · Shoes", icon: "02", items: ["Outerwear", "Denim", "Sneakers"] },
+  { tag: "MARKET", name: "Groceries", sub: "Fresh + pantry", icon: "03", items: ["Produce", "Drinks", "Essentials"] },
+  { tag: "TECH", name: "Electronics", sub: "Daily technology", icon: "04", items: ["Audio", "Mobile", "Gaming"] },
+  { tag: "LIVING", name: "Home & Beauty", sub: "Make home feel better", icon: "05", items: ["Kitchen", "Decor", "Beauty"] },
+  { tag: "PLAY", name: "Toys & More", sub: "Kids · Auto · Outdoor", icon: "06", items: ["Toys", "Auto", "Outdoor"] },
+];
+
+const merchandise = [
+  ["ESSENTIAL TEE", "$14", "FASHION"], ["PANTRY FIND", "$1", "DOLLAR"], ["WIRELESS AUDIO", "$29", "TECH"],
+  ["HOME SET", "$18", "LIVING"], ["FRESH MARKET", "$6", "GROCERY"], ["EVERYDAY SNEAKER", "$32", "FASHION"]
 ];
 
 export default function Hero({ onShopClick, onCartOpen }) {
   const [active, setActive] = useState(0);
-
-  useEffect(() => {
-    const id = window.setInterval(() => setActive((n) => (n + 1) % lanes.length), 2200);
-    return () => window.clearInterval(id);
-  }, []);
+  useEffect(() => { const id = window.setInterval(() => setActive((n) => (n + 1) % departments.length), 3600); return () => window.clearInterval(id); }, []);
+  const dept = departments[active];
 
   return (
-    <header className="los-world">
-      <nav className="los-nav">
-        <a href="#" className="los-brand"><span>LAND</span><b>OF SHOPPING</b></a>
-        <div className="los-navlinks">
-          <a href="#categories">Aisles</a><a href="#featured">Drops</a><a href="#store">Store</a>
-        </div>
-        <button onClick={onCartOpen} className="los-bag">BAG ↗</button>
+    <header className="dept-world">
+      <nav className="dept-nav">
+        <a href="#" className="dept-brand"><span>LAND</span><i>of</i><b>SHOPPING</b></a>
+        <div className="dept-navlinks"><a href="#categories">Departments</a><a href="#featured">New Arrivals</a><a href="#store">The Store</a></div>
+        <button onClick={onCartOpen} className="dept-bag">SHOPPING BAG <span>0</span></button>
       </nav>
 
-      <div className="los-ticker">
-        <div>OPEN NOW ✦ SURPRISE FINDS ✦ UNDER $10 ✦ SNACKS ✦ TECH ✦ HOME ✦ TOYS ✦ OPEN NOW ✦ SURPRISE FINDS ✦ UNDER $10 ✦ SNACKS ✦ TECH ✦ HOME ✦ TOYS ✦</div>
-      </div>
+      <div className="dept-service"><span>OPEN DAILY</span><div>THE DEPARTMENT STORE FOR EVERYTHING</div><span>EST. 2026</span></div>
 
-      <div className="los-hero-grid">
-        <section className="los-copy">
-          <div className="los-kicker">WELCOME TO THE SHOPPING DISTRICT</div>
-          <h1><span>LAND</span><span>OF</span><span>SHOPPING</span></h1>
-          <p>Not a catalog. Not a boring grid. A little digital neighborhood packed with cheap finds, everyday stuff and things you did not plan on buying.</p>
-          <div className="los-actions"><button onClick={onShopClick}>ENTER THE AISLES →</button><a href="#featured">SEE WHAT'S MOVING</a></div>
-        </section>
+      <section className="dept-entrance">
+        <div className="dept-copy">
+          <div className="dept-eyebrow">WELCOME INSIDE · SIX DEPARTMENTS · ONE STORE</div>
+          <h1>Everything<br/><em>has a place.</em></h1>
+          <p>Walk through fashion, groceries, dollar finds, electronics, home, beauty and more — one department at a time.</p>
+          <div className="dept-actions"><button onClick={onShopClick}>ENTER THE STORE</button><a href="#featured">SHOP NEW ARRIVALS ↗</a></div>
+          <div className="dept-floor-index"><span>GROUND FLOOR</span><b>01 — 06</b><small>SCROLL TO EXPLORE</small></div>
+        </div>
 
-        <section className="los-map" aria-label="Interactive shopping district map">
-          <div className="los-map-title"><span>YOU ARE HERE</span><b>DISTRICT 01</b></div>
-          <div className="los-crosswalk los-crosswalk--one"/><div className="los-crosswalk los-crosswalk--two"/>
-          <div className="los-road los-road--h"><i/><i/><i/><i/></div><div className="los-road los-road--v"><i/><i/><i/></div>
-          {lanes.map(([tag,name], i) => (
-            <button key={name} onClick={() => setActive(i)} className={`los-shop los-shop--${i+1} ${active === i ? "is-active" : ""}`}>
-              <small>{tag}</small><strong>{name}</strong><span>{String(i+1).padStart(2,"0")}</span>
-            </button>
-          ))}
-          <div className="los-you"><span>●</span> YOU</div>
-          <div className="los-delivery los-delivery--a">▣</div><div className="los-delivery los-delivery--b">▣</div>
-        </section>
-      </div>
+        <div className="dept-corridor">
+          <div className="dept-ceiling">{[0,1,2,3,4].map(n => <i key={n}/>)}</div>
+          <div className="dept-sign"><small>NOW APPROACHING</small><strong>{dept.name}</strong><span>{dept.tag}</span></div>
+          <div className="dept-perspective-lines"><i/><i/><i/><i/></div>
+          <div className="dept-left-display"><small>FEATURED</small><b>{dept.items[0]}</b><div className="dept-mannequin"><i/><span/></div><strong>{dept.items[1]}</strong></div>
+          <div className="dept-right-display"><small>THIS WAY</small><b>{dept.items[2]}</b><div className="dept-shelf"><i/><i/><i/></div><strong>NEW IN</strong></div>
+          <div className="dept-door"><span>{dept.icon}</span><strong>{dept.name}</strong><small>ENTER DEPARTMENT →</small></div>
+          <div className="dept-cart">▱<span>••</span></div>
+        </div>
+      </section>
 
-      <div className="los-lane-board">
-        <div><small>NOW ENTERING</small><strong>{lanes[active][0]}</strong><span>{lanes[active][1]}</span></div>
-        <div className="los-price-wheel"><span>$1</span><span>$5</span><span>$10</span><span>NEW</span></div>
-        <button onClick={onShopClick}>WALK THIS WAY ↘</button>
-      </div>
+      <section className="dept-directory">
+        <div className="dept-directory-title"><small>STORE DIRECTORY</small><strong>Choose a department</strong></div>
+        <div className="dept-tabs">{departments.map((d,i)=><button key={d.name} onClick={()=>setActive(i)} className={active===i?"active":""}><span>{d.icon}</span><div><b>{d.name}</b><small>{d.sub}</small></div></button>)}</div>
+      </section>
 
-      <div className="los-conveyor" aria-hidden="true"><div><span>CHIPS</span><span>USB-C</span><span>CLEANER</span><span>TOYS</span><span>CANDY</span><span>PAPER</span><span>TOOLS</span><span>CHIPS</span><span>USB-C</span><span>CLEANER</span><span>TOYS</span><span>CANDY</span></div></div>
+      <section className="dept-merch">
+        <div className="dept-merch-head"><span>MERCHANDISE MOVING THROUGH THE STORE</span><b>LIVE FLOOR</b></div>
+        <div className="dept-belt"><div>{[...merchandise,...merchandise].map((m,i)=><article key={i}><div className={`dept-product dept-product--${i%6}`}><span>{m[2]}</span></div><small>{m[2]}</small><strong>{m[0]}</strong><b>{m[1]}</b></article>)}</div></div>
+      </section>
     </header>
   );
 }
