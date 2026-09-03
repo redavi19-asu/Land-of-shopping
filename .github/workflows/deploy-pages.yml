@@ -1,4 +1,4 @@
-name: Deploy ryans-land to GitHub Pages
+name: Build Land of Shopping into docs
 
 on:
   push:
@@ -6,20 +6,16 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
-  group: pages
+  group: land-of-shopping-docs
   cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  build-docs:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout repository
@@ -36,18 +32,25 @@ jobs:
         working-directory: ryans-land
         run: npm ci
 
-      - name: Build
+      - name: Build Vite site
         working-directory: ryans-land
         run: npm run build
 
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
+      - name: Refresh docs from dist
+        run: |
+          rm -rf docs
+          mkdir -p docs
+          cp -R ryans-land/dist/. docs/
+          touch docs/.nojekyll
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ryans-land/dist
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Commit generated Pages site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          if git diff --cached --quiet; then
+            echo "docs already current"
+          else
+            git commit -m "Deploy Land of Shopping to docs"
+            git push origin main
+          fi
