@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import './LeftScrolly.css';
 
 export default function LeftScrolly() {
   const items = [
@@ -10,6 +11,7 @@ export default function LeftScrolly() {
 
   const [active, setActive] = useState(items[0].id);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [showHint, setShowHint] = useState(true);
 
   useEffect(() => {
     const els = items.map(i => document.getElementById(i.id)).filter(Boolean);
@@ -22,26 +24,35 @@ export default function LeftScrolly() {
     return () => io.disconnect();
   }, []);
 
+  useEffect(() => {
+    const timer = window.setTimeout(() => setShowHint(false), 3600);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   return (
     <>
-      <button
-        type="button"
-        aria-controls="site-left-scrolly"
-        aria-expanded={mobileOpen}
-        onClick={() => setMobileOpen(v => !v)}
-        className="md:hidden fixed left-4 top-1/4 z-40 bg-white/30 p-2 rounded-full shadow-none backdrop-blur-sm"
-      >
-        <span className="sr-only">Toggle navigation</span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-slate-700">
-          {mobileOpen ? (
-            <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-          ) : (
-            <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M4 7h16M4 12h16M4 17h16" />
-          )}
-        </svg>
-      </button>
+      <div className="mobile-menu-float md:hidden">
+        <button
+          type="button"
+          aria-controls="site-left-scrolly"
+          aria-expanded={mobileOpen}
+          onClick={() => { setMobileOpen(v => !v); setShowHint(false); }}
+          className={`mobile-menu-trigger ${mobileOpen ? 'is-open' : ''}`}
+        >
+          <span className="sr-only">Toggle navigation</span>
+          <span className="mobile-menu-trigger__ring" aria-hidden="true" />
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            {mobileOpen ? (
+              <path strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+            )}
+          </svg>
+        </button>
+        <span className={`mobile-menu-hint ${showHint && !mobileOpen ? 'is-visible' : ''}`} aria-hidden="true">Menu</span>
+      </div>
 
-  <aside id="site-left-scrolly" className={`left-scrolly ${mobileOpen ? 'fixed' : 'hidden'} md:flex flex-col items-start gap-3 fixed top-1/3 left-6 z-30`}>
+      <aside id="site-left-scrolly" className={`left-scrolly ${mobileOpen ? 'fixed' : 'hidden'} md:flex flex-col items-start gap-3 fixed top-1/3 left-6 z-30`}>
         {items.map(it => (
           <button
             key={it.id}
