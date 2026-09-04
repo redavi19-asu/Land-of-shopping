@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./HeroSpecial.css";
+import "./HeroInteractive.css";
 
 const departments = [
   { tag: "$1 DEPARTMENT", name: "Dollar Market", sub: "Everyday steals", icon: "01", items: ["Pantry", "Cleaning", "Snacks"] },
